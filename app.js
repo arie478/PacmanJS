@@ -3,6 +3,7 @@ var shape = new Object();
 var board;
 var score;
 var pac_color;
+var pac_direction;
 var start_time;
 var time_elapsed;
 var interval;
@@ -108,14 +109,51 @@ function Draw() {
 			center.y = j * 60 + 30;
 			if (board[i][j] == 2) {
 				context.beginPath();
-				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+
+				if (pac_direction == "down")
+				{
+					// Facing down
+					context.arc(center.x, center.y, 30, 0.75 * Math.PI, 2.2 * Math.PI); // half circle
+				}
+
+				else if (pac_direction == "left")
+				{
+					// Facing left
+					context.arc(center.x, center.y, 30, 1.2 * Math.PI, 2.8 * Math.PI); // half circle
+				}
+				
+				else if (pac_direction == "up")
+				{
+					// Facing left
+					context.arc(center.x, center.y, 30, 1.75 * Math.PI, 3.2 * Math.PI); // half circle
+				}
+
+				else 
+				{
+						// Facing right
+						context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle 
+				}
+				
 				context.lineTo(center.x, center.y);
 				context.fillStyle = pac_color; //color
 				context.fill();
 				context.beginPath();
-				context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
+
+				if (pac_direction == "up")
+				{
+					// Facing up eye
+					context.arc(center.x - 7, center.y + 10, 5, 0, 2 * Math.PI); // circle
+				}
+				else
+				{
+					// Facing left down right eye
+					context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
+				}
+
+
 				context.fillStyle = "black"; //color
 				context.fill();
+
 			} else if (board[i][j] == 1) {
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
@@ -137,21 +175,25 @@ function UpdatePosition() {
 	if (x == 1) {
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
 			shape.j--;
+			pac_direction = "up"
 		}
 	}
 	if (x == 2) {
 		if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
 			shape.j++;
+			pac_direction = "down"
 		}
 	}
 	if (x == 3) {
 		if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
 			shape.i--;
+			pac_direction = "left"
 		}
 	}
 	if (x == 4) {
 		if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
 			shape.i++;
+			pac_direction = "right"
 		}
 	}
 	if (board[shape.i][shape.j] == 1) {
