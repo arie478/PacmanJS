@@ -1,21 +1,72 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<script src="./jquery-3.4.1.slim.min.js"></script>
-		<script type="text/javascript" src="./app.js"></script>
-	</head>
 
-	<body>
-		<div id="score">
-			<label for="lblScore">SCORE:</label>
-			<input id="lblScore" type="text" />
+<head>
+	<title>E&A Pacman</title>
+	<link rel="shortcut icon" type="image/x-icon" href="assets/images/icon.png" />
+	<script src="./jquery-3.4.1.slim.min.js"></script>
+	<script type="text/javascript" src="./app.js"></script>
+	<script type="text/javascript" src="scripts/menu.js"></script>
+
+</head>
+
+<body>
+	<!-- HEADER -->
+	<div id="header">
+		<center>
+		<img src="assets/images/pacman_3.png" width="300" height="50">
+		<h3>BY EDEN CHAI & ARIE KATZ</h3>
+		</center>
+	</div>
+
+	<!-- MENU -->
+	<div class="menu">
+		<button class="nav" id="welcome"  onClick="showPage(`welcome_screen`)">WELCOME</button>
+		<button class="nav" id="register" onClick="showPage(`register_screen`)">REGISTER</button>
+		<button class="nav" id="login" onClick="showPage(`login_screen`)">LOGIN</button>
+		<button class="nav" id="about">ABOUT</button>
+	</div>
+
+	<!-- CONTENT -->
+	<div content>
+
+		<!-- WELCOME SCREEN -->
+		<div class="screen" id="welcome_screen">
+			<div id="icon_app">
+				<img src="assets/images/pacman_1.jpg" width="600" height="300">
+			</div>
+			<button class="nav" id="register" onClick="showPage(`register_screen`)">REGISTER</button>
+			<button class="nav" id="login" onClick="showPage(`login_screen`)">LOGIN</button>
 		</div>
-		<div id="time">
-			<label for="lblTime">TIME:</label>
-			<input id="lblTime" type="text" />
+
+		<!-- REGISTER SCREEN -->
+		<div class="screen" id="register_screen">
+
 		</div>
-		<div id="game">
-			<canvas id="canvas" height="600" width="600"></canvas>
+
+		<!-- LOGIN SCREEN -->
+		<div class="screen" id="login_screen">
+
 		</div>
-	</body>
+	</div>
+
+	<!-- FOOTER -->
+	<div class="footer">
+		<p>Footer</p>
+	</div>
+
+
+	<div id="score">
+		<label for="lblScore">SCORE:</label>
+		<input id="lblScore" type="text" />
+	</div>
+	<div id="time">
+		<label for="lblTime">TIME:</label>
+		<input id="lblTime" type="text" />
+	</div>
+	<div id="game">
+		<canvas id="canvas" height="600" width="600"></canvas>
+	</div>
+</body>
+
 </html>
