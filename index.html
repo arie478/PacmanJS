@@ -4,59 +4,175 @@
 <head>
 	<title>E&A Pacman</title>
 	<link rel="shortcut icon" type="image/x-icon" href="assets/images/icon.png" />
-	<script src="./jquery-3.4.1.slim.min.js"></script>
-	<script type="text/javascript" src="./app.js"></script>
-	<script type="text/javascript" src="scripts/menu.js"></script>
 
+	<!-- ============================== CSS ============================== -->
+	<link rel="stylesheet" type="text/css" href="styles/style.css">
+	<link rel="stylesheet" type="text/css" href="styles/menu.css">
+	<link rel="stylesheet" type="text/css" href="styles/welcome.css">
+	<link rel="stylesheet" type="text/css" href="styles/register.css">
+	<link rel="stylesheet" type="text/css" href="styles/login.css">
+	<link rel="stylesheet" type="text/css" href="styles/setting.css">
 </head>
 
 <body>
-	<!-- HEADER -->
-	<div id="header">
-		<center>
-		<img src="assets/images/pacman_3.png" width="300" height="50">
-		<h3>BY EDEN CHAI & ARIE KATZ</h3>
-		</center>
-	</div>
+	<!-- ============================== HEADER ============================== -->
 
-	<!-- MENU -->
-	<div class="menu">
-		<button class="nav" id="welcome"  onClick="showPage(`welcome_screen`)">WELCOME</button>
-		<button class="nav" id="register" onClick="showPage(`register_screen`)">REGISTER</button>
-		<button class="nav" id="login" onClick="showPage(`login_screen`)">LOGIN</button>
-		<button class="nav" id="about">ABOUT</button>
-	</div>
+	<header>
+		<img src="assets/images/pacman_4.png" width="500" height="80">
+		<h1>CREATED BY: EDEN CHAI & ARIE KATZ</h1>
+	</header>
 
-	<!-- CONTENT -->
+
+	<!-- ============================== MENU ============================== -->
+
+	<nav class="container border">
+		<a button class="btn" id="welcome" onclick="showPage('welcome_screen')">WELCOME</a>
+		<a button class="btn" id="register" onclick="showPage('register_screen'), reset_register_form()">REGISTER</a>
+		<a button class="btn" id="login" onclick="showPage('login_screen'), reset_login_form()">LOGIN</a>
+		<a button class="btn" id="about">ABOUT</a>
+	</nav>
+
+	<!-- ============================== CONTENT ============================== -->
+
 	<div content>
 
-		<!-- WELCOME SCREEN -->
+		<!-- ============================== WELCOME SCREEN ============================== -->
+
 		<div class="screen" id="welcome_screen">
-			<div id="icon_app">
-				<img src="assets/images/pacman_1.jpg" width="600" height="300">
+			<div>
+				<center>
+				<img src="assets/images/pacman_11.png" width="900" height="500" >
+				</center>
 			</div>
-			<button class="nav" id="register" onClick="showPage(`register_screen`)">REGISTER</button>
-			<button class="nav" id="login" onClick="showPage(`login_screen`)">LOGIN</button>
+
+			<nav class="container border">
+				<a button class="btn" id="login" onclick="showPage('login_screen'), reset_login_form()">LOG IN</a>
+				<a button class="btn" id="register" onclick="showPage('register_screen'), reset_register_form()">REGISTER</a>
+			</nav>
 		</div>
 
-		<!-- REGISTER SCREEN -->
-		<div class="screen" id="register_screen">
 
+		<!-- ============================== REGISTER SCREEN ============================== -->
+
+		<div class="screen" id="register_screen" style="display: none;">
+			<div class="register_box">
+				<h2>REGISTER</h2>
+				<form id="register_form" autocomplete="off">
+					<div class="user_box">
+						<label>Username</label><br>
+						<input type="text" name="username_register" id="username_register">
+					</div>
+					<div class="user_box">
+						<label>Password</label><br>
+						<input type="password" name="password_register" id="password_register">
+					</div>
+					<div class="user_box">
+						<label>Full Name</label><br>
+						<input type="text" name="full_name_register" id="full_name_register">
+					</div>
+					<div class="user_box">
+						<label>Email</label><br>
+						<input type="email" name="email_register" id="email_register">
+					</div>
+					<div class="user_box">
+						<label>Birthdate</label><br>
+						<input type="date" name="date_register" id="date_register" min="1900-01-01" max="2022-01-01">
+
+					</div>
+					<button id="submit_register" type="submit">REGISTER</button>
+					<button id="reset_register" type="reset">RESET</button>
+				</form>
+			</div>
 		</div>
 
-		<!-- LOGIN SCREEN -->
-		<div class="screen" id="login_screen">
+		<!-- ============================== LOGIN SCREEN ============================== -->
 
+		<div class="screen" id="login_screen" style="display: none;">
+			<div class="login_box">
+				<h2>LOG IN</h2>
+				<form id="login_form" autocomplete="off">
+					<div class="user_box">
+						<label>Username</label><br>
+						<input type="text" name="username_login" id="username_login"><br>
+					</div>
+					<div class="user_box">
+						<label>Password</label><br>
+						<input type="password" name="password_login" id="password_login"><br>
+					</div>
+					<button id="submit_login" type="submit">LOG IN</button>
+					<button id="reset_login" type="reset">RESET</button>
+				</form>
+			</div>
+		</div>
+
+		<div class="screen" id="setting_screen">
+			<div class="setting_box">
+				<h2>SETTING</h2>
+				<form id="setting_form" autocomplete="off">
+					<div class="user_box">
+						<label>Key Up</label><br>
+						<input type="text" name="Up" id="Up" placeholder="Key Up" required><br>
+					</div>
+					<div class="user_box">
+						<label>Key Down</label><br>
+						<input type="text" name="Down" id="Down" placeholder="Key Down" required>
+					</div>
+					<div class="user_box">
+						<label>Key Right</label><br>
+						<input type="text" name="Right" id="Right" placeholder="Key Right" required>
+					</div>
+					<div class="user_box">
+						<label>Key Left</label><br>
+						<input type="text" name="Left" id="Left" placeholder="Key Left" required>
+					</div>
+					<div class="user_box">
+						<label>Number of Balls</label><br>
+						<input type="number" name="num_of_balls" id="num_of_balls" value="70" min="50" max="90">
+					</div>
+					<div class="user_box">
+						<label>5 Points Balls Color</label><br>
+						<input type="color" name="5_points" id="5_points" value="#00ff00">
+					</div>
+					<div class="user_box">
+						<label>15 Points Balls Color</label><br>
+						<input type="color" name="15_points" id="15_points" value="#0000ff">
+					</div>
+					<div class="user_box">
+						<label>25 Points Balls Color</label><br>
+						<input type="color" name="25_points" id="25_points" value="#ff6347">
+					</div>
+					<div class="user_box">
+						<label>Game Time</label><br>
+						<input type="number" name="game_time" id="game_time" value="60" min="60">
+					</div>
+					<div class="user_box">
+						<label>Number of Goasts</label><br>
+						<input type="number" name="num_of_goasts" id="num_of_goasts" value="1" min="1" max="4">
+					</div>
+					<button class="btn" id="submit_setting" type="submit">START</button>
+					<button class="btn" id="reset_setting" type="reset">RANDOM</button>
+				</form>
+			</div>
+		</div>
+
+		<div class="screen" id="game_screen" style="display: none;">
+			<h2>game</h2>
+		</div>
+
+
+		<div class="about" id="about_screen" style="display: none;">
+			<h2>about</h2>
 		</div>
 	</div>
 
-	<!-- FOOTER -->
-	<div class="footer">
-		<p>Footer</p>
-	</div>
+	<!-- ============================== FOOTER ============================== -->
+
+	<footer class="footer">
+		<span>Footer</span>
+	</footer>
 
 
-	<div id="score">
+	<!-- <div id="score">
 		<label for="lblScore">SCORE:</label>
 		<input id="lblScore" type="text" />
 	</div>
@@ -66,7 +182,19 @@
 	</div>
 	<div id="game">
 		<canvas id="canvas" height="600" width="600"></canvas>
-	</div>
+	</div> -->
+
+	<!-- ============================== SCRIPTS ============================== -->
+
+	<script type="text/javascript" src="scripts/jquery-3.4.1.slim.min.js"></script>
+	<script type="text/javascript" src="scripts/jquery.validate.js"></script>
+
+	<!-- <script type="text/javascript" src="scripts/app.js"></script> -->
+	<script type="text/javascript" src="scripts/menu.js"></script>
+	<script type="text/javascript" src="scripts/register.js"></script>
+	<script type="text/javascript" src="scripts/login.js"></script>
+	<script type="text/javascript" src="scripts/setting.js"></script>
+
 </body>
 
 </html>

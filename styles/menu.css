@@ -1,0 +1,44 @@
+nav.container {
+	font-family: Raleway;
+	margin: 1%;
+	padding: 1% 0 0 0;
+	text-align: center;
+}
+
+nav.container a {
+	color: #FFF;
+	text-decoration: none;
+	font: 20px Raleway;
+	margin: 0 2%;
+	position: relative;
+	cursor: pointer;
+}
+
+/* Top and Bottom borders go out */
+nav.border a:before,
+nav.border a:after {
+	position: absolute;
+	left: 0px;
+	width: 100%;
+	height: 2px;
+	background: #FFF;
+	content: "";
+	opacity: 0;
+	transition: all 0.3s;
+}
+
+nav.border a:before {
+	top: 0px;
+	transform: translateY(10px);
+}
+
+nav.border a:after {
+	bottom: 0;
+	transform: translateY(-10px);
+}
+
+nav.border a:hover:before,
+nav.border a:hover:after {
+	opacity: 1;
+	transform: translateY(0px);
+}

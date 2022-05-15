@@ -1,4 +1,3 @@
-
 function showPage(div_id) 
 {
     $(".screen").hide();    // hide all screens
