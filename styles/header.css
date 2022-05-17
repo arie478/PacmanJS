@@ -1,0 +1,27 @@
+header 
+{
+	background: #00629e;
+	text-align: center;
+    height: 120px;
+}
+
+header img
+{
+	display: block;
+	margin: 0 auto;
+	max-height: 100%;
+	max-width: 100%;
+	width: 600px;
+	height: 100px;
+}
+
+h1
+{
+	margin-top: -10px;
+	/* margin-bottom: 10px; */
+	font-size: 16px;
+	/* font-weight: lighter; */
+	color: #09ff00ab;
+	font-family: cursive;
+	letter-spacing: 3px;
+}

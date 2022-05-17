@@ -4,7 +4,7 @@ $(document).ready(function () {
     // Save username and password in localStorage mechanism (no need to save full name, email and date)
     localStorage.setItem('k', 'k')
 
-    $("#login_form").validate({
+    $('#login_form').validate({
         rules:
         {
             username_login: { required: true },
@@ -13,9 +13,15 @@ $(document).ready(function () {
 
         messages:
         {
-            username_login: { required: '<br>Please enter a user name' },
-            password_login: { required: '<br>Please enter a password' }
+            username_login: { required: 'Please enter a user name' },
+            password_login: { required: 'Please enter a password' }
         },
+
+        errorPlacement: function (label, element) {
+            label.addClass('error_message');
+            label.insertAfter(element);
+        },
+        wrapper: 'span',
 
         submitHandler:
             function ()
@@ -28,8 +34,8 @@ $(document).ready(function () {
 
 function login() 
 {
-    let username_input = document.getElementById("username_login").value;
-    let passord_input = document.getElementById("password_login").value;
+    let username_input = document.getElementById('username_login').value;
+    let passord_input = document.getElementById('password_login').value;
     let real_password = localStorage.getItem(username_input)
 
     if (real_password == passord_input) 
@@ -39,7 +45,7 @@ function login()
     }
     else 
     {
-        alert("Username or Password are invalid");
+        alert('Username or Password are invalid');
         showPage('login_screen');
     }
 }
@@ -48,4 +54,10 @@ function reset_login_form()
 {
     let form = document.getElementById('login_form');
     form.reset();
+
+    let error = document.getElementsByClassName('error');
+    [...error].forEach(element => {
+        element.classList.remove('error');
+        element.innerHTML = '';
+    })
 }

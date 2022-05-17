@@ -5,196 +5,225 @@
 	<title>E&A Pacman</title>
 	<link rel="shortcut icon" type="image/x-icon" href="assets/images/icon.png" />
 
-	<!-- ============================== CSS ============================== -->
+	<!-- --------------------------------- CSS --------------------------------- -->
 	<link rel="stylesheet" type="text/css" href="styles/style.css">
+	<link rel="stylesheet" type="text/css" href="styles/header.css">
 	<link rel="stylesheet" type="text/css" href="styles/menu.css">
 	<link rel="stylesheet" type="text/css" href="styles/welcome.css">
 	<link rel="stylesheet" type="text/css" href="styles/register.css">
 	<link rel="stylesheet" type="text/css" href="styles/login.css">
 	<link rel="stylesheet" type="text/css" href="styles/setting.css">
+	<link rel="stylesheet" type="text/css" href="styles/about.css">
+	<link rel="stylesheet" type="text/css" href="styles/footer.css">
+
 </head>
 
 <body>
-	<!-- ============================== HEADER ============================== -->
+	<!-- ------------------------------- HEADER -------------------------------- -->
+	<div class="header_container">
+		<header>
+			<img src="assets/images/pacman_4.png">
+			<h1>EDEN CHAI & ARIE KATZ</h1>
+		</header>
+	</div> <!-- end header -->
 
-	<header>
-		<img src="assets/images/pacman_4.png" width="500" height="80">
-		<h1>CREATED BY: EDEN CHAI & ARIE KATZ</h1>
-	</header>
+	<!-- -------------------------------- MENU --------------------------------- -->
+	<div class="menu_container">
+		<nav class="menu_buttons">
+			<ul>
+				<li><a class="menu_button" id="welcome" onclick="showPage('welcome_screen')">WELCOME</a></li>
+				<li><a class="menu_button" id="register" onclick="showPage('register_screen'), reset_register_form()">REGISTER</a></li>
+				<li><a class="menu_button" id="login" onclick="showPage('login_screen'), reset_login_form()">LOGIN</a></li>
+				<li><a class="menu_button" id="about">ABOUT</a></li>
+			</ul>
+		</nav>
+	</div> <!-- end menu -->
 
-
-	<!-- ============================== MENU ============================== -->
-
-	<nav class="container border">
-		<a button class="btn" id="welcome" onclick="showPage('welcome_screen')">WELCOME</a>
-		<a button class="btn" id="register" onclick="showPage('register_screen'), reset_register_form()">REGISTER</a>
-		<a button class="btn" id="login" onclick="showPage('login_screen'), reset_login_form()">LOGIN</a>
-		<a button class="btn" id="about">ABOUT</a>
-	</nav>
-
-	<!-- ============================== CONTENT ============================== -->
-
-	<div content>
-
-		<!-- ============================== WELCOME SCREEN ============================== -->
-
+	<!-- ------------------------------- SCREENS ------------------------------- -->
+	<div class="screens_container">
+		<!-- --------------------------- WELCOME SCREEN ---------------------------- -->
 		<div class="screen" id="welcome_screen">
-			<div>
-				<center>
-				<img src="assets/images/pacman_11.png" width="900" height="500" >
-				</center>
-			</div>
+			<img src="assets/images/pacman_11.png" width="900" height="500">
 
-			<nav class="container border">
-				<a button class="btn" id="login" onclick="showPage('login_screen'), reset_login_form()">LOG IN</a>
-				<a button class="btn" id="register" onclick="showPage('register_screen'), reset_register_form()">REGISTER</a>
+			<nav class="welcome_buttons">
+				<button class="welcome_button" id="login" onclick="showPage('login_screen'), reset_login_form()">SIGN IN</button>
+				<button class="welcome_button" id="register" onclick="showPage('register_screen'), reset_register_form()">SIGN UP</button>
 			</nav>
-		</div>
+		</div> <!-- end welcome screen -->
 
-
-		<!-- ============================== REGISTER SCREEN ============================== -->
-
+		<!-- --------------------------- REGISTER SCREEN --------------------------- -->
 		<div class="screen" id="register_screen" style="display: none;">
 			<div class="register_box">
 				<h2>REGISTER</h2>
 				<form id="register_form" autocomplete="off">
-					<div class="user_box">
-						<label>Username</label><br>
+					<div class="input_box">
+						<label>Username</label>
 						<input type="text" name="username_register" id="username_register">
 					</div>
-					<div class="user_box">
-						<label>Password</label><br>
+					<div class="input_box">
+						<label>Password</label>
 						<input type="password" name="password_register" id="password_register">
 					</div>
-					<div class="user_box">
-						<label>Full Name</label><br>
+					<div class="input_box">
+						<label>Full Name</label>
 						<input type="text" name="full_name_register" id="full_name_register">
 					</div>
-					<div class="user_box">
-						<label>Email</label><br>
-						<input type="email" name="email_register" id="email_register">
+					<div class="input_box">
+						<label>Email</label>
+						<input type="text" name="email_register" id="email_register">
 					</div>
-					<div class="user_box">
-						<label>Birthdate</label><br>
-						<input type="date" name="date_register" id="date_register" min="1900-01-01" max="2022-01-01">
-
+					<div class="input_box">
+						<label>Birthdate</label>
+						<input type="date" name="date_register" id="date_register">
 					</div>
-					<button id="submit_register" type="submit">REGISTER</button>
-					<button id="reset_register" type="reset">RESET</button>
-				</form>
-			</div>
-		</div>
+					<button type="submit" class="button" id="submit_register">REGISTER</button>
+					<button type="reset" class="button" id="reset_register" onclick="reset_register_form()">RESET</button>
+				</form> <!-- end register form -->
+			</div> <!-- end register box -->
+		</div> <!-- end register screen-->
 
-		<!-- ============================== LOGIN SCREEN ============================== -->
-
+		<!-- ---------------------------- LOGIN SCREEN ----------------------------- -->
 		<div class="screen" id="login_screen" style="display: none;">
 			<div class="login_box">
 				<h2>LOG IN</h2>
 				<form id="login_form" autocomplete="off">
-					<div class="user_box">
-						<label>Username</label><br>
-						<input type="text" name="username_login" id="username_login"><br>
+					<div class="input_box">
+						<label>Username</label>
+						<input type="text" name="username_login" id="username_login">
 					</div>
-					<div class="user_box">
-						<label>Password</label><br>
-						<input type="password" name="password_login" id="password_login"><br>
+					<div class="input_box">
+						<label>Password</label>
+						<input type="password" name="password_login" id="password_login">
 					</div>
-					<button id="submit_login" type="submit">LOG IN</button>
-					<button id="reset_login" type="reset">RESET</button>
-				</form>
-			</div>
-		</div>
+					<button type="submit" class="button" id="submit_login">LOG IN</button>
+					<button type="reset" class="button" id="reset_login" onclick="reset_login_form()">RESET</button>
+				</form> <!-- end login form -->
+			</div> <!-- end login box -->
+		</div> <!-- end login screen-->
 
-		<div class="screen" id="setting_screen">
+		<!-- --------------------------- SETTING SCREEN ---------------------------- -->
+		<div class="screen" id="setting_screen"  style="display: none;">
 			<div class="setting_box">
-				<h2>SETTING</h2>
+				<h2>SETTINGS</h2>
 				<form id="setting_form" autocomplete="off">
-					<div class="user_box">
-						<label>Key Up</label><br>
-						<input type="text" name="Up" id="Up" placeholder="Key Up" required><br>
+
+					<!-- KEYS -->
+					<div class="input_box">
+						<label>Key Up</label>
+						<input type="text" name="up" id="up" onkeydown="set_key_pressed('up')">
 					</div>
-					<div class="user_box">
-						<label>Key Down</label><br>
-						<input type="text" name="Down" id="Down" placeholder="Key Down" required>
+					<div class="input_box">
+						<label>Key Down</label>
+						<input type="text" name="down" id="down" onkeydown="set_key_pressed('down')">
 					</div>
-					<div class="user_box">
-						<label>Key Right</label><br>
-						<input type="text" name="Right" id="Right" placeholder="Key Right" required>
+					<div class="input_box">
+						<label>Key Right</label>
+						<input type="text" name="right" id="right" onkeydown="set_key_pressed('right')">
 					</div>
-					<div class="user_box">
-						<label>Key Left</label><br>
-						<input type="text" name="Left" id="Left" placeholder="Key Left" required>
+					<div class="input_box">
+						<label>Key Left</label>
+						<input type="text" name="left" id="left" onkeydown="set_key_pressed('left')">
 					</div>
-					<div class="user_box">
-						<label>Number of Balls</label><br>
-						<input type="number" name="num_of_balls" id="num_of_balls" value="70" min="50" max="90">
+
+					<!-- COLORS -->
+					<div class="input_box">
+						<label>5 Points Balls Color</label>
+						<input type="color" name="5_points" id="5_points" value="#ff0000">
 					</div>
-					<div class="user_box">
-						<label>5 Points Balls Color</label><br>
-						<input type="color" name="5_points" id="5_points" value="#00ff00">
-					</div>
-					<div class="user_box">
-						<label>15 Points Balls Color</label><br>
+					<div class="input_box">
+						<label>15 Points Balls Color</label>
 						<input type="color" name="15_points" id="15_points" value="#0000ff">
 					</div>
-					<div class="user_box">
-						<label>25 Points Balls Color</label><br>
-						<input type="color" name="25_points" id="25_points" value="#ff6347">
+					<div class="input_box">
+						<label>25 Points Balls Color</label>
+						<input type="color" name="25_points" id="25_points" value="#3079a6">
 					</div>
-					<div class="user_box">
-						<label>Game Time</label><br>
-						<input type="number" name="game_time" id="game_time" value="60" min="60">
-					</div>
-					<div class="user_box">
-						<label>Number of Goasts</label><br>
-						<input type="number" name="num_of_goasts" id="num_of_goasts" value="1" min="1" max="4">
-					</div>
-					<button class="btn" id="submit_setting" type="submit">START</button>
-					<button class="btn" id="reset_setting" type="reset">RANDOM</button>
-				</form>
-			</div>
-		</div>
 
+					<!-- NUMBERS -->
+					<div class="input_box">
+						<label>Duration of the Game (minimum 60 seconds)</label>
+						<input type="number" name="total_time" id="total_time" value="60" min="60">
+					</div>
+					<div class="input_box">
+						<label>Total Number of Balls (between 50 - 90)</label>
+						<input type="number" name="balls" id="balls" value="70" min="50" max="90">
+					</div>
+					<div class="input_box">
+						<label>Number of Ghosts (between 1 - 4)</label>
+						<input type="number" name="ghosts" id="ghosts" value="3" min="1" max="4">
+					</div>
+
+					<button type="submit" class="button" id="start_game" onclick="set_user_settings()">START GAME</button>
+					<button type="submit" class="button" id="random_game" onclick="set_random_settings()">RANDOM</button>
+
+				</form> <!-- end setting form -->
+			</div> <!-- end setting box -->
+		</div> <!-- end setting screen-->
+
+		<!-- ----------------------------- GAME SCREEN ----------------------------- -->
 		<div class="screen" id="game_screen" style="display: none;">
 			<h2>game</h2>
+			<div id="score">
+				<label for="lblScore">SCORE:</label>
+				<input id="lblScore" type="text" />
+			</div>
+
+			<div id="time">
+				<label for="lblTime">TIME:</label>
+				<input id="lblTime" type="text" />
+			</div>
+
+			<div id="game">
+				<canvas id="canvas" height="600" width="600"></canvas>
+			</div>
+		</div> <!-- end game screen -->
+
+	</div> <!-- end screens -->
+
+	<!-- -------------------------------- ABOUT -------------------------------- -->
+	<div class="about_modal" id="about_modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+			<h2>ABOUT US</h2>
+			<p>
+			<b>Created by:</b><br>
+			Eden Chai & Arie Katz<br><br>
+
+			<b>jQuery Plugin Usage:</b><br>
+			We used jQuery validation plugins to validate and verify the details entered by the user.<br>
+			We used this פlugin on the game's registration, login and settings screens.<br><br>
+
+			<b>Template Usage:</b><br>
+			We took some templates from codepen.io and w3schools.<br><br>
+
+			<b>Difficulties:</b><br>
+			• Cause the ghosts to chase intelligently.<br>
+			• Maintaining the logic between all menus and screens.<br>
+			• Create synchronization between the intervals of all objects.<br>
+			• Deleting JQuery validator errors after they appeared on the form.<br>
+			• Code without a compiler that recognizes your mistakes and suggest a fix.<br>
+			</p>
+			<h3>enjoy!</h3>
 		</div>
 
+	</div> <!-- end about -->
 
-		<div class="about" id="about_screen" style="display: none;">
-			<h2>about</h2>
-		</div>
-	</div>
-
-	<!-- ============================== FOOTER ============================== -->
-
-	<footer class="footer">
-		<span>Footer</span>
+	<!-- ------------------------------- FOOTER -------------------------------- -->
+	<footer>
+		<a>Contact Us: </a>
+		<a href="mailto:edench@post.bgu.ac.il">edench@post.bgu.ac.il</a> <a>•</a> <a href="mailto:ariekat@post.bgu.ac.il">ariekat@post.bgu.ac.il</a>
 	</footer>
 
-
-	<!-- <div id="score">
-		<label for="lblScore">SCORE:</label>
-		<input id="lblScore" type="text" />
-	</div>
-	<div id="time">
-		<label for="lblTime">TIME:</label>
-		<input id="lblTime" type="text" />
-	</div>
-	<div id="game">
-		<canvas id="canvas" height="600" width="600"></canvas>
-	</div> -->
-
-	<!-- ============================== SCRIPTS ============================== -->
-
+	<!-- ------------------------------- SCRIPTS ------------------------------- -->
 	<script type="text/javascript" src="scripts/jquery-3.4.1.slim.min.js"></script>
 	<script type="text/javascript" src="scripts/jquery.validate.js"></script>
 
-	<!-- <script type="text/javascript" src="scripts/app.js"></script> -->
+	<script type="text/javascript" src="scripts/app.js"></script>
 	<script type="text/javascript" src="scripts/menu.js"></script>
 	<script type="text/javascript" src="scripts/register.js"></script>
 	<script type="text/javascript" src="scripts/login.js"></script>
 	<script type="text/javascript" src="scripts/setting.js"></script>
-
+	<script type="text/javascript" src="scripts/about.js"></script>
 </body>
 
 </html>

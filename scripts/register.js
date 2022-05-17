@@ -1,5 +1,4 @@
 $(document).ready(function () {
-
     localStorage.setItem('k', 'k')
 
     // Check if username already exists
@@ -26,7 +25,7 @@ $(document).ready(function () {
         return this.optional(element) || /^[a-zA-Z\s]+$/i.test(value);
     });
 
-    $("#register_form").validate({
+    $('#register_form').validate({
         rules:
         {
             username_register:
@@ -56,7 +55,9 @@ $(document).ready(function () {
             },
             date_register:
             {
-                required: true
+                required: true,
+                min: '1900-01-01',
+                max: '2022-01-01'
             }
         },
 
@@ -64,36 +65,44 @@ $(document).ready(function () {
         {
             username_register:
             {
-                required: '<br>Please enter a user name',
-                is_exist: '<br>Username already exists'
+                required: 'Please enter a user name',
+                is_exist: 'Username already exists'
             },
 
             password_register:
             {
-                required: '<br>Please enter a password',
-                password_length: '<br>Password must be at least 6 characters',
-                password_contains_one_digit: '<br>Password must be contains at least one digit',
-                password_contains_one_char: '<br>Password must be contains at least one char'
+                required: 'Please enter a password',
+                password_length: 'Password must be at least 6 characters',
+                password_contains_one_digit: 'Password must be contains at least one digit',
+                password_contains_one_char: 'Password must be contains at least one char'
 
             },
 
             full_name_register:
             {
-                required: '<br>Please enter a full name',
-                full_name_letters_only: '<br>Please enter letters only'
+                required: 'Please enter a full name',
+                full_name_letters_only: 'Please enter letters only'
             },
 
             email_register:
             {
-                required: '<br>Please enter an email',
-                email: '<br>Please enter a valid email'
+                required: 'Please enter an email',
+                email: 'Please enter a valid email'
             },
 
             date_register:
             {
-                required: '<br>Please enter a birthdate'
+                required: 'Please enter a birthdate',
+                min: 'Please enter a date after 01-01-1900',
+                max: 'Please enter a date before 01-01-2022'
             }
         },
+        errorPlacement: function (label, element) {
+            label.addClass('error_message');
+            label.insertAfter(element);
+        },
+        wrapper: 'span',
+
         submitHandler:
             function () {
                 register();
@@ -104,13 +113,18 @@ $(document).ready(function () {
 });
 
 function register() {
-    let username = document.getElementById("username_register").value;
-    let password = document.getElementById("password_register").value;
+    let username = document.getElementById('username_register').value;
+    let password = document.getElementById('password_register').value;
     localStorage.setItem(username, password);
 }
 
-function reset_register_form()
-{
-    let form = document.getElementById("register_form");
+function reset_register_form() {
+    let form = document.getElementById('register_form');
     form.reset();
+
+    let error = document.getElementsByClassName('error');
+    [...error].forEach(element => {
+        element.classList.remove('error');
+        element.innerHTML = '';
+    })
 }

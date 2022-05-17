@@ -1,0 +1,15 @@
+footer 
+{
+	text-align: center;
+	bottom: 0 auto;
+	background: #00629e;
+	padding: 15px;
+}
+
+footer  a
+{
+	text-decoration: none;
+	color: rgba(255, 255, 255, 0.616);
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
+	font-size: 16px;
+}

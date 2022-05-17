@@ -1,0 +1,66 @@
+@import 'https://fonts.googleapis.com/css?family=Frijole';
+@import 'https://fonts.googleapis.com/css?family=Coming+Soon';
+
+/* The Modal (background) */
+.about_modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 200px; /* Location of the box */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content 
+{
+  background: hwb(254 3% 63% / 0.7);
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #6883bc;
+  width: 650px;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.342);
+  border-top-left-radius: 60px;
+  border-bottom-right-radius: 60px;
+  font-family: "Open Sans";
+}
+
+/* The Close Button */
+.close 
+{
+  color: #aaaaaa;
+  float: right;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.close:hover, .close:focus 
+{
+  color: rgba(0, 0, 0, 0.339);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-content h2 
+{
+    font-family: Frijole;
+  text-align: center;
+  color: rgb(237, 152, 152);
+  font-size: 30px;
+}
+
+.modal-content h3 
+{
+  text-align: center;
+  color: rgb(240, 208, 208);
+}
+
+p 
+{
+  color: white;
+  font-family: coming soon;
+  font-weight: lighter;
+}

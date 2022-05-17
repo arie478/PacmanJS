@@ -84,10 +84,10 @@ function findRandomEmptyCell(board) {
 }
 
 function GetKeyPressed() {
-	if (keysDown[38]) { return 1; } // up
-	if (keysDown[40]) {	return 2; } // down
-	if (keysDown[37]) {	return 3; } // left
-	if (keysDown[39]) {	return 4; } // right
+	if (keysDown[keys_code['up']]) { return 1; } // up
+	if (keysDown[keys_code['down']]) {	return 2; } // down
+	if (keysDown[keys_code['left']]) {	return 3; } // left
+	if (keysDown[keys_code['right']]) { return 4; } // right
 }
 
 function Draw() {
