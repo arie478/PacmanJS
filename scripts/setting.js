@@ -50,10 +50,16 @@ $(document).ready(function () {
 // Take the user input key and insert it to keys_dict
 function set_key_pressed(key_pressed) {
     $(document).keydown(function (event) {
-        keys_code[key_pressed] = event.keyCode;
+        keys_code[key_pressed] = event .keyCode;
+        // let c = event .keyCode;
         keys_symbol[key_pressed] = event.key;
-        document.getElementById(key_pressed).value = keys_symbol[key_pressed];
-        console.log(key_pressed + ': ' + keys_symbol[key_pressed]);
+        // if (((c < 48) || (c > 90)) && (c < 186)) {
+            document.getElementById(key_pressed).value = keys_symbol[key_pressed];
+        // }
+        // else{
+            // document.getElementById(key_pressed).value = '';
+        // }
+        // console.log(key_pressed + ': ' + keys_symbol[key_pressed]);
 
         $(document).unbind();
     });
@@ -89,8 +95,14 @@ function set_user_settings() {
         console.log(colors);
         console.log(numbers);
 
-        showPage('game_screen');
-        reset_setting_form();
+        // showPage('game_screen');
+
+        document.getElementById('game_screen').style.display = 'block';
+        // document.getElementById('setting_screen').style.display = 'block';
+        context = canvas.getContext("2d");
+        Start();
+        // context = canvas.getContext("2d");
+        // reset_setting_form();
     }
 }
 

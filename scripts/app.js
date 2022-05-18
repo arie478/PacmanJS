@@ -23,16 +23,10 @@ var cherry;
 
 // SETTINGS
 settings_lives = 5;
-settings_time = 60;
-settings_enemy_count = 1;
-settings_food_count = 90;
 
+// $(document).ready(function() {
 
-
-$(document).ready(function() {
-	context = canvas.getContext("2d");
-	Start();
-});
+// });
 
 player_up = new Image();
 player_up.src = "./assets/images/PacManUp.png";
@@ -138,7 +132,8 @@ const scaledHeight = scale * height;
 rows_num = 20;
 cols_num = 20;
 var cnt = 179;
-enemy_num = settings_enemy_count;
+enemy_num = numbers['ghosts'];
+console.log(enemy_num);
 
 
 
@@ -153,11 +148,11 @@ function Start()
 	player = new Array(2);
 	score = 0;
 	pac_color = "yellow";
-	var food_remain = settings_food_count;
+	var food_remain = numbers['balls'];
 	// Allocate food in 10 30 60 % manner
-	var big_food_remain = Math.round(settings_food_count*0.1);
-	var med_food_remain = Math.round(settings_food_count*0.3);
-	var small_food_remain = Math.round(settings_food_count*0.6);
+	var big_food_remain = Math.round(numbers['balls']*0.1);
+	var med_food_remain = Math.round(numbers['balls']*0.3);
+	var small_food_remain = Math.round(numbers['balls']*0.6);
 
 
 	frozen = false;
@@ -557,7 +552,7 @@ function Start()
 	);
 	interval = setInterval(UpdatePosition, 50);
 	interval_enemy = setInterval(moveEnemies,1000);
-	countDowntimer = startTimer(settings_time,  document.getElementById("time"));
+	countDowntimer = startTimer(numbers['total_time'],  document.getElementById("time"));
 	power_ups = setInterval(spawn_power_up,  2000);
 }
 
@@ -683,21 +678,21 @@ function drawFood(center, type)
 	if (type == 25)
 	{
 		context.arc(center.x, center.y+2, 12, 0, 2 * Math.PI); // circle
-		context.fillStyle = "purple"; //color
+		context.fillStyle = colors['25']; //color
 		context.fill();
 		context.drawImage(coin25, 0, 0, width, height, center.x-16, center.y-14, scaledWidth, scaledHeight);
 	}
 	if (type == 15)
 	{
 		context.arc(center.x, center.y+2, 10, 0, 2 * Math.PI); // circle
-		context.fillStyle = "blue"; //color
+		context.fillStyle = colors['15']; //color
 		context.fill();
 		context.drawImage(coin15, 0, 0, width, height, center.x-16, center.y-14, scaledWidth, scaledHeight);
 	}
 	if (type == 5)
 	{
 		context.arc(center.x, center.y+2, 7, 0, 2 * Math.PI); // circle
-		context.fillStyle = "green"; //color
+		context.fillStyle = colors['5']; //color
 		context.fill();
 		context.drawImage(coin5, 0, 0, width, height, center.x-16, center.y-14, scaledWidth, scaledHeight);
 	}

@@ -42,7 +42,7 @@
 	<!-- ------------------------------- SCREENS ------------------------------- -->
 	<div class="screens_container">
 		<!-- --------------------------- WELCOME SCREEN ---------------------------- -->
-		<div class="screen" id="welcome_screen">
+		<div class="screen" id="welcome_screen" style="display: none;">
 			<img src="assets/images/pacman_11.png" width="900" height="500">
 
 			<nav class="welcome_buttons">
@@ -102,7 +102,7 @@
 		</div> <!-- end login screen-->
 
 		<!-- --------------------------- SETTING SCREEN ---------------------------- -->
-		<div class="screen" id="setting_screen"  style="display: none;">
+		<div class="screen" id="setting_screen">
 			<div class="setting_box">
 				<h2>SETTINGS</h2>
 				<form id="setting_form" autocomplete="off">
@@ -167,8 +167,8 @@
 				<label for="lblLives">Lives:</label>
 				<input id="lblLives" type="text" />
 			</div>
+			<!-- <div id="score"> -->
 			<div id="score">
-			 <div id="score">
 				<label for="lblScore">SCORE:</label>
 				<input id="lblScore" type="text" />
 			</div>
@@ -178,7 +178,7 @@
 			</div>
 			<div id="game">
 				<canvas id="canvas" height="600" width="600"></canvas>
-			</div> 
+			</div>
 		</div> <!-- end game screen -->
 
 	</div> <!-- end screens -->
@@ -189,22 +189,22 @@
 			<span class="close">&times;</span>
 			<h2>ABOUT US</h2>
 			<p>
-			<b>Created by:</b><br>
-			Eden Chai & Arie Katz<br><br>
+				<b>Created by:</b><br>
+				Eden Chai & Arie Katz<br><br>
 
-			<b>jQuery Plugin Usage:</b><br>
-			We used jQuery validation plugins to validate and verify the details entered by the user.<br>
-			We used this פlugin on the game's registration, login and settings screens.<br><br>
+				<b>jQuery Plugin Usage:</b><br>
+				We used jQuery validation plugins to validate and verify the details entered by the user.<br>
+				We used this פlugin on the game's registration, login and settings screens.<br><br>
 
-			<b>Template Usage:</b><br>
-			We took some templates from codepen.io and w3schools.<br><br>
+				<b>Template Usage:</b><br>
+				We took some templates from codepen.io and w3schools.<br><br>
 
-			<b>Difficulties:</b><br>
-			• Cause the ghosts to chase intelligently.<br>
-			• Maintaining the logic between all menus and screens.<br>
-			• Create synchronization between the intervals of all objects.<br>
-			• Deleting JQuery validator errors after they appeared on the form.<br>
-			• Code without a compiler that recognizes your mistakes and suggest a fix.<br>
+				<b>Difficulties:</b><br>
+				• Cause the ghosts to chase intelligently.<br>
+				• Maintaining the logic between all menus and screens.<br>
+				• Create synchronization between the intervals of all objects.<br>
+				• Deleting JQuery validator errors after they appeared on the form.<br>
+				• Code without a compiler that recognizes your mistakes and suggest a fix.<br>
 			</p>
 			<h3>enjoy!</h3>
 		</div>
@@ -221,12 +221,12 @@
 	<script type="text/javascript" src="scripts/jquery-3.4.1.slim.min.js"></script>
 	<script type="text/javascript" src="scripts/jquery.validate.js"></script>
 
-	<script type="text/javascript" src="scripts/app.js"></script>
 	<script type="text/javascript" src="scripts/menu.js"></script>
 	<script type="text/javascript" src="scripts/register.js"></script>
 	<script type="text/javascript" src="scripts/login.js"></script>
 	<script type="text/javascript" src="scripts/setting.js"></script>
 	<script type="text/javascript" src="scripts/about.js"></script>
+	<script type="text/javascript" src="scripts/app.js"></script>
 </body>
 
 </html>
