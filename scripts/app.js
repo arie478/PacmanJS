@@ -20,9 +20,21 @@ var power_up_hp;
 var power_up_cherry;
 var interval_cherry;
 var cherry;
+var game_over;
+
+$(document).ready(function() {
+	//context = canvas.getContext("2d");
+	window.addEventListener("keydown", function(e) {
+		if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+			e.preventDefault();
+		}
+	}, false);
+});
+
 
 // SETTINGS
-settings_lives = 5;
+settings_lives = 1;
+vol_food = 0.1;
 
 // $(document).ready(function() {
 
@@ -76,53 +88,72 @@ cherry.src = "./assets/images/cherry.png";
 
 
 background = new Image();
-background.src = "./assets/images/Background.png";
+//background.src = "./assets/images/Background.png";
+//background.src = "./assets/images/Background_Blue.png";
+background.src = "./assets/images/Background_Light_Blue.png";
 
 enemy_frozen = new Image();
 enemy_frozen.src = "./assets/images/Frozen.png";
 
 
 var audio_power_popup_1 = new Audio("./assets/sound/bubble_effect_01.wav");
+audio_power_popup_1.volume = 0.5;
 var audio_power_popup_2 = new Audio("./assets/sound/bubble_effect_02.wav");
+audio_power_popup_2.volume = 0.5;
 var audio_power_popup_3 = new Audio("./assets/sound/bubble_effect_03.wav");
+audio_power_popup_3.volume = 0.5;
 var audio_power_popup_4 = new Audio("./assets/sound/bubble_effect_04.wav");
+audio_power_popup_4.volume = 0.5;
 var audio_power_popup = [audio_power_popup_1, audio_power_popup_2, audio_power_popup_3, audio_power_popup_4];
 
 var audio_collectFood_1 = new Audio("./assets/sound/comedy_bite_chew_01.wav");
+audio_collectFood_1.volume = vol_food;
 var audio_collectFood_2 = new Audio("./assets/sound/comedy_bite_chew_02.wav");
+audio_collectFood_2.volume = vol_food;
 var audio_collectFood_3 = new Audio("./assets/sound/comedy_bite_chew_03.wav");
+audio_collectFood_3.volume = vol_food;
 var audio_collectFood_4 = new Audio("./assets/sound/comedy_bite_chew_04.wav");
+audio_collectFood_4.volume = vol_food;
 var audio_collectFood_5 = new Audio("./assets/sound/comedy_bite_chew_05.wav");
+audio_collectFood_5.volume = vol_food;
 var audio_collectFood_6 = new Audio("./assets/sound/comedy_bite_chew_06.wav");
+audio_collectFood_6.volume = vol_food;
 var audio_collectFood = [audio_collectFood_1, audio_collectFood_2, audio_collectFood_3, audio_collectFood_4, audio_collectFood_5, audio_collectFood_6];
 
 var audio_collectFood_big_1 = new Audio("./assets/sound/comedy_bite_creature_eating_02.wav");
+audio_collectFood_big_1.volume = vol_food;
 var audio_collectFood_big_2 = new Audio("./assets/sound/comedy_bite_creature_eating_03.wav");
+audio_collectFood_big_2.volume = vol_food;
 var audio_collectFood_big_3 = new Audio("./assets/sound/comedy_bite_creature_eating_05.wav");
+audio_collectFood_big_3.volume = vol_food;
 var audio_collectFood_big = [audio_collectFood_big_1, audio_collectFood_big_2, audio_collectFood_big_3];
 
 var audio_collectFood_huge_1 = new Audio("./assets/sound/comedy_bite_creature_eating_07.wav");
+audio_collectFood_huge_1.volume = vol_food;
 var audio_collectFood_huge_2 = new Audio("./assets/sound/comedy_bite_creature_eating_08.wav");
+audio_collectFood_huge_2.volume = vol_food;
 var audio_collectFood_huge = [audio_collectFood_huge_1, audio_collectFood_huge_2];
 
 var audio_enemyHit = new Audio("./assets/sound/retro_damage_hurt_ouch_21.wav");
+audio_enemyHit.volume = 0.5;
 
 var audio_snowflake = new Audio("./assets/sound/Ice_4.mp3");
+audio_snowflake.volume = 0.2;
 
 var audio_clock = new Audio("./assets/sound/clock-ticking-4.wav");
 
 var audio_snowflake_end = new Audio("./assets/sound/Ice_8.mp3");
+audio_snowflake_end.volume = 0.2;
 
 var audio_hpPill = new Audio("./assets/sound/GetItem2.mp3");
+audio_hpPill.volume = 0.5;
 
 var audio_background = new Audio("./assets/sound/ChipChippy_(loop).mp3");
+audio_background.loop = true;
+audio_background.volume = 0.1;
 
 var audio_cherry_pick =  new Audio("./assets/sound/Food2.mp3");
 
-
-audio_background.muted = true;
-audio_background.loop = true;
-audio_background.volume = 0.2;
 
 const scale = 2;
 const width = 16;
@@ -132,13 +163,15 @@ const scaledHeight = scale * height;
 rows_num = 20;
 cols_num = 20;
 var cnt = 179;
-enemy_num = numbers['ghosts'];
-console.log(enemy_num);
 
 
 
 function Start() 
 {
+	enemy_num = numbers['ghosts'];
+	console.log(enemy_num);
+
+	console.log("Playing Background music");
 	audio_background.play();
 
 	cell_height =document.getElementById("canvas").height/rows_num;
@@ -148,11 +181,12 @@ function Start()
 	player = new Array(2);
 	score = 0;
 	pac_color = "yellow";
-	var food_remain = numbers['balls'];
 	// Allocate food in 10 30 60 % manner
 	var big_food_remain = Math.round(numbers['balls']*0.1);
 	var med_food_remain = Math.round(numbers['balls']*0.3);
 	var small_food_remain = Math.round(numbers['balls']*0.6);
+	food_to_eat = big_food_remain + med_food_remain + small_food_remain;
+	food_to_make = food_to_eat;
 
 
 	frozen = false;
@@ -475,25 +509,27 @@ function Start()
 					{
 					var randomNum = Math.random();
 					//Make food
-					if (randomNum <= (1.0 * food_remain) / cnt) 
+					if (randomNum <= (1.0 * food_to_make) / cnt) 
 					{
 						var food_type = Math.random();
 						if (food_type <=0.1 && big_food_remain > 0)
 						{
 							board[i][j] = "F25";
 							big_food_remain--;
+							food_to_make--;
 						}
 						else if (food_type > 0.1 && food_type <= 0.4 && med_food_remain > 0)
 						{
 							board[i][j] = "F15";
 							med_food_remain--;
+							food_to_make--;
 						}
 						else if (food_type > 0.4 && small_food_remain > 0)
 						{
 							board[i][j] = "F5";
 							small_food_remain--;
+							food_to_make--;
 						}
-						food_remain--;
 					} 
 					//Make empty space
 					else 
@@ -512,7 +548,7 @@ function Start()
 	player.j = emptyCell[1];
 	board[emptyCell[0]][emptyCell[1]] = "P";
 
-	while (food_remain > 0) 
+	while (food_to_make > 0) 
 	{
 		var emptyCell = findRandomEmptyCell(board);
 		var food_type = Math.random();
@@ -521,19 +557,22 @@ function Start()
 		{
 			board[emptyCell[0]][emptyCell[01]] = "F25";
 			big_food_remain--;
+			food_to_make--;
 		}
 		else if (food_type > 0.1 && food_type <= 0.4 && med_food_remain > 0)
 		{
 			board[emptyCell[0]][emptyCell[1]] = "F15";
 			med_food_remain--;
+			food_to_make--;
 		}
 		else if (food_type > 0.4 && small_food_remain > 0)
 		{
 			board[emptyCell[0]][emptyCell[1]] = "F5";
 			small_food_remain--;
+			food_to_make--;
 		}
-		food_remain--;
 	}
+	console.log("Placed all food!");
 
 	keysDown = {};
 	addEventListener(
@@ -966,7 +1005,7 @@ function moveEnemies()
 		{
 			//If player gets hit
 			audio_enemyHit.play();
-			if (settings_lives> 0)
+			if (settings_lives > 1)
 			{
 				settings_lives--;
 				score -= 10;
@@ -974,7 +1013,8 @@ function moveEnemies()
 			}
 			else
 			{
-				resetAfterLose();
+				settings_lives--;
+				gameOver()
 			}
 		}
 		else
@@ -1020,18 +1060,24 @@ function UpdatePosition()
 	{
 		score+= 25;
 		audio_collectFood_huge[Math.floor(Math.random()*audio_collectFood_huge.length)].play();
+		food_to_eat--;
+		console.log("Food left : " + food_to_eat);
 	}
 	// Collecting food worth 15 points
 	if (board[player.i][player.j] == "F15") 
 	{
 		score+= 15;
 		audio_collectFood_big[Math.floor(Math.random()*audio_collectFood_big.length)].play();
+		food_to_eat--;
+		console.log("Food left : " + food_to_eat);
 	}
 	// Collecting food worth 5 points
 	if (board[player.i][player.j] == "F5") 
 	{
 		score+= 5;
 		audio_collectFood[Math.floor(Math.random()*audio_collectFood.length)].play();
+		food_to_eat--;
+		console.log("Food left : " + food_to_eat);
 	}
 
 	// Collecting food worth 5 points
@@ -1053,7 +1099,7 @@ function UpdatePosition()
 	// Snow flake bonus pickup
 	if (board[player.i][player.j] == "S") 
 	{
-		power_up_freeze = false;
+		power_up_freeze = true;
 		audio_snowflake.play();
 		setTimeout(function () 
 		{
@@ -1067,6 +1113,7 @@ function UpdatePosition()
 					window.clearInterval(interval_enemy);
 					interval_enemy = setInterval(moveEnemies,1000);
 					frozen = false;
+					power_up_freeze = false;
 			}, 10000);
 		}, 300);
 	}
@@ -1097,7 +1144,7 @@ function UpdatePosition()
 	{
 		//If player gets hit
 		audio_enemyHit.play();
-		if (settings_lives> 0)
+		if (settings_lives > 1)
 		{
 			settings_lives--;
 			score -= 10;
@@ -1120,17 +1167,26 @@ function UpdatePosition()
 		}
 		else
 		{
-			resetAfterLose();
+			settings_lives--;
+			gameOver();
 		}
 	}
 
+ 
+	/**
+	 * 
+	 * 
+	 *  END GAME
+	 * 
+	 * 
+	 */
 
 
 	board[player.i][player.j] = "P";
-	if (score == 400) 
+
+	if (food_to_eat == 0 ) 
 	{
-		window.clearInterval(interval);
-		window.alert("Game completed");
+		gameOver();
 	} else {
 		Draw();
 	}
@@ -1194,13 +1250,6 @@ function resetAfterHit()
 	
 }
 
-function resetAfterLose()
-{
-	window.clearInterval(interval);
-	window.clearInterval(interval_enemy);
-	window.clearInterval(countDowntimer);
-}
-
 function startTimer( gameDuration, timer_div)
 {
 	var minutes, seconds;
@@ -1219,7 +1268,7 @@ function startTimer( gameDuration, timer_div)
         if (--timer < 0) 
 		{
 			//Game over here
-            timer = gameDuration;
+           	gameOver();
         }
     }, 1000);
 }
@@ -1251,13 +1300,15 @@ function spawn_power_up()
 	{
 		emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = "S";
-		power_up_freeze = true;
 		audio_power_popup[Math.floor(Math.random()*audio_power_popup.length)].play();
 	}
 
 	if (!power_up_cherry && randomNum > 0.75)
 	{
-		emptyCell = findRandomEmptyCell(board);
+		//j 8 - 12 
+		// i 6 - 13
+		emptyCell = [9,8];
+
 		cherry.i = emptyCell[0];
 		cherry.j = emptyCell[1];
 		cherry.memory = "0"
@@ -1307,5 +1358,31 @@ function moveCherry()
 	else
 	{
 		Draw();
+	}
+}
+
+
+function gameOver()
+{
+	window.clearInterval(interval);
+	window.clearInterval(interval_enemy);
+	window.clearInterval(countDowntimer);
+	window.clearInterval(power_ups);
+	if (power_up_freeze)
+	{
+		window.clearInterval(freeze_timer);
+	}
+	audio_background.pause();
+	if (settings_lives == 0)
+	{
+		window.alert("Loser! You will now be taken back to the settings menu where you can start a new game.");
+	}
+	else if (score < 100)
+	{
+		window.alert("You are better than " + score + " points! You will now be taken back to the settings menu where you can start a new game.");
+	}
+	else
+	{
+		window.alert("Winner!!! You will now be taken back to the settings menu where you can start a new game.");
 	}
 }
