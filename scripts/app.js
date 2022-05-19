@@ -21,6 +21,8 @@ var power_up_cherry;
 var interval_cherry;
 var cherry;
 var game_over;
+var start_timer_aux;
+var music_on;
 
 $(document).ready(function() {
 	//context = canvas.getContext("2d");
@@ -33,7 +35,7 @@ $(document).ready(function() {
 
 
 // SETTINGS
-settings_lives = 1;
+
 vol_food = 0.1;
 
 // $(document).ready(function() {
@@ -165,10 +167,9 @@ var cnt = 179;
 
 function Start() 
 {
+	music_on = true;
+	settings_lives = 5;
 	enemy_num = numbers['ghosts'];
-	console.log(enemy_num);
-
-	console.log("Playing Background music");
 	audio_background.play();
 
 	cell_height = document.getElementById("canvas").height / rows_num;
@@ -550,7 +551,6 @@ function Start()
 			food_to_make--;
 		}
 	}
-	console.log("Placed all food!");
 
 	keysDown = {};
 	addEventListener(
@@ -924,7 +924,8 @@ function moveEnemies() {
 			else
 			{
 				settings_lives--;
-				gameOver()
+				gameOver();
+				showMessage();
 			}
 		}
 		else {
@@ -969,7 +970,6 @@ function UpdatePosition() {
 		score+= 25;
 		audio_collectFood_huge[Math.floor(Math.random()*audio_collectFood_huge.length)].play();
 		food_to_eat--;
-		console.log("Food left : " + food_to_eat);
 	}
 	// Collecting food worth 15 points
 	if (board[player.i][player.j] == "F15") 
@@ -977,7 +977,6 @@ function UpdatePosition() {
 		score+= 15;
 		audio_collectFood_big[Math.floor(Math.random()*audio_collectFood_big.length)].play();
 		food_to_eat--;
-		console.log("Food left : " + food_to_eat);
 	}
 	// Collecting food worth 5 points
 	if (board[player.i][player.j] == "F5") 
@@ -985,7 +984,6 @@ function UpdatePosition() {
 		score+= 5;
 		audio_collectFood[Math.floor(Math.random()*audio_collectFood.length)].play();
 		food_to_eat--;
-		console.log("Food left : " + food_to_eat);
 	}
 
 	// Collecting food worth 5 points
@@ -1069,6 +1067,7 @@ function UpdatePosition() {
 		{
 			settings_lives--;
 			gameOver();
+			showMessage();
 		}
 	}
 
@@ -1087,6 +1086,7 @@ function UpdatePosition() {
 	if (food_to_eat == 0 ) 
 	{
 		gameOver();
+		showMessage();
 	} else {
 		Draw();
 	}
@@ -1146,7 +1146,7 @@ function startTimer( gameDuration, timer_div)
 {
 	var minutes, seconds;
 	timer = gameDuration;
-	setInterval(function () {
+	start_timer_aux = setInterval(function () {
 		minutes = parseInt(timer / 60, 10)
 		seconds = parseInt(timer % 60, 10);
 
@@ -1156,9 +1156,11 @@ function startTimer( gameDuration, timer_div)
 		//timer_div.textContent = minutes + ":" + seconds;
 		lblTime.value = minutes + ":" + seconds;
 
-		if (--timer < 0) {
+		if (--timer < 0) 
+		{
 			//Game over here
            	gameOver();
+			showMessage();
         }
     }, 1000);
 }
@@ -1240,18 +1242,23 @@ function moveCherry() {
 	}
 }
 
-
 function gameOver()
 {
 	window.clearInterval(interval);
 	window.clearInterval(interval_enemy);
 	window.clearInterval(countDowntimer);
 	window.clearInterval(power_ups);
+	window.clearInterval(start_timer_aux);
+	window.clearInterval(interval_cherry);
 	if (power_up_freeze)
 	{
 		window.clearInterval(freeze_timer);
 	}
 	audio_background.pause();
+}
+
+function showMessage()
+{
 	if (settings_lives == 0)
 	{
 		window.alert("Loser! You will now be taken back to the settings menu where you can start a new game.");
@@ -1266,7 +1273,6 @@ function gameOver()
 	}
 }
 
-
 function show_settings()
 {
 	lblUp.value = keys_symbol['up'];
@@ -1279,4 +1285,18 @@ function show_settings()
 	lblBalls.value = numbers['balls'];
 	lblGameTime.value = numbers['time'];
 	lblGhosts.value = numbers['ghosts'];
+}
+
+function check_music()
+{
+	if (music_on)
+	{
+		audio_background.pause();
+		music_on = false;
+	}
+	else
+	{
+		audio_background.play();
+		music_on = true;
+	}
 }

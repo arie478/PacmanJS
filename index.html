@@ -163,8 +163,6 @@
 
 		<!-- ----------------------------- GAME SCREEN ----------------------------- -->
 		<div class="screen" id="game_screen" style="display: none;">
-	
-
 			<div class="game_container">
 				<div class="properties">
 					<div class="property_box" id="player_name">
@@ -238,8 +236,8 @@
 					</tbody>
 				</table>
 				<div>
-					<button class="game_button" id="login" onclick="showPage('setting_screen')"><i class="fa-solid fa-play"></i> NEW GAME</button>
-					<button class="game_button" id="login"><i class="fa-solid fa-volume-high"></i> MUSIC</button>
+					<button class="game_button" id="new_game" onclick="showPage('setting_screen'), gameOver(), reset_setting_form()"><i class="fa-solid fa-play"></i> NEW GAME</button>
+					<button class="game_button" id="mute" onclick="check_music()"><i class="fa-solid fa-volume-high"></i> MUSIC</button>
 				</div>
 			</div>
 		</div> <!-- end game screen -->

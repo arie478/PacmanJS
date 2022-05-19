@@ -2,9 +2,9 @@ var keys_symbol = { 'up': 'ArrowUp', 'down': 'ArrowDown', 'left': 'ArrowLeft', '
 var keys_code = { 'up': 38, 'down': 40, 'left': 37, 'right': 39 };
 var colors = { '5': '#ff0000', '15': '#0000ff', '25': '#3079a6' };
 var numbers = { 'balls': 70, 'ghosts': 3, 'time': 60 };
-var default_keys=[33,34,35,36,37,38,39,40];
 
-$(document).ready(function () {
+$(document).ready(function () 
+{
     $('#setting_form').validate({
         rules:
         {
@@ -49,26 +49,16 @@ $(document).ready(function () {
     });
 });
 
+
 // Take the user input key and insert it to keys_dict
 function set_key_pressed(key_pressed) 
 {
     $(document).keydown(function (event) 
     {
-    // if (document.getElementById(key_pressed).value != '')
-    // {
-    //     document.getElementById(key_pressed).value = '';
-    // }
-        keys_code[key_pressed] = event.keycode;
+        event.preventDefault();
+        keys_code[key_pressed] = event.keyCode;
         keys_symbol[key_pressed] = event.key;
         document.getElementById(key_pressed).value = keys_symbol[key_pressed];
-        // if (event.kecode > 33 && event.kecode < 90)
-        // {
-        //     document.getElementById(key_pressed).value = keys_symbol[key_pressed];
-        // }
-        // else
-        // {
-        //     document.getElementById(key_pressed).value = '';
-        // }
         $(document).unbind();
     });
 }
