@@ -95,63 +95,63 @@ background.src = "./assets/images/Background_Light_Blue.png";
 enemy_frozen = new Image();
 enemy_frozen.src = "./assets/images/Frozen.png";
 
-var audio_power_popup_1 = new Audio("./assets/sound/bubble_effect_01.wav");
+var audio_power_popup_1 = new Audio("./assets/sounds/bubble_effect_01.wav");
 audio_power_popup_1.volume = 0.5;
-var audio_power_popup_2 = new Audio("./assets/sound/bubble_effect_02.wav");
+var audio_power_popup_2 = new Audio("./assets/sounds/bubble_effect_02.wav");
 audio_power_popup_2.volume = 0.5;
-var audio_power_popup_3 = new Audio("./assets/sound/bubble_effect_03.wav");
+var audio_power_popup_3 = new Audio("./assets/sounds/bubble_effect_03.wav");
 audio_power_popup_3.volume = 0.5;
-var audio_power_popup_4 = new Audio("./assets/sound/bubble_effect_04.wav");
+var audio_power_popup_4 = new Audio("./assets/sounds/bubble_effect_04.wav");
 audio_power_popup_4.volume = 0.5;
 var audio_power_popup = [audio_power_popup_1, audio_power_popup_2, audio_power_popup_3, audio_power_popup_4];
 
-var audio_collectFood_1 = new Audio("./assets/sound/comedy_bite_chew_01.wav");
+var audio_collectFood_1 = new Audio("./assets/sounds/comedy_bite_chew_01.wav");
 audio_collectFood_1.volume = vol_food;
-var audio_collectFood_2 = new Audio("./assets/sound/comedy_bite_chew_02.wav");
+var audio_collectFood_2 = new Audio("./assets/sounds/comedy_bite_chew_02.wav");
 audio_collectFood_2.volume = vol_food;
-var audio_collectFood_3 = new Audio("./assets/sound/comedy_bite_chew_03.wav");
+var audio_collectFood_3 = new Audio("./assets/sounds/comedy_bite_chew_03.wav");
 audio_collectFood_3.volume = vol_food;
-var audio_collectFood_4 = new Audio("./assets/sound/comedy_bite_chew_04.wav");
+var audio_collectFood_4 = new Audio("./assets/sounds/comedy_bite_chew_04.wav");
 audio_collectFood_4.volume = vol_food;
-var audio_collectFood_5 = new Audio("./assets/sound/comedy_bite_chew_05.wav");
+var audio_collectFood_5 = new Audio("./assets/sounds/comedy_bite_chew_05.wav");
 audio_collectFood_5.volume = vol_food;
-var audio_collectFood_6 = new Audio("./assets/sound/comedy_bite_chew_06.wav");
+var audio_collectFood_6 = new Audio("./assets/sounds/comedy_bite_chew_06.wav");
 audio_collectFood_6.volume = vol_food;
 var audio_collectFood = [audio_collectFood_1, audio_collectFood_2, audio_collectFood_3, audio_collectFood_4, audio_collectFood_5, audio_collectFood_6];
 
-var audio_collectFood_big_1 = new Audio("./assets/sound/comedy_bite_creature_eating_02.wav");
+var audio_collectFood_big_1 = new Audio("./assets/sounds/comedy_bite_creature_eating_02.wav");
 audio_collectFood_big_1.volume = vol_food;
-var audio_collectFood_big_2 = new Audio("./assets/sound/comedy_bite_creature_eating_03.wav");
+var audio_collectFood_big_2 = new Audio("./assets/sounds/comedy_bite_creature_eating_03.wav");
 audio_collectFood_big_2.volume = vol_food;
-var audio_collectFood_big_3 = new Audio("./assets/sound/comedy_bite_creature_eating_05.wav");
+var audio_collectFood_big_3 = new Audio("./assets/sounds/comedy_bite_creature_eating_05.wav");
 audio_collectFood_big_3.volume = vol_food;
 var audio_collectFood_big = [audio_collectFood_big_1, audio_collectFood_big_2, audio_collectFood_big_3];
 
-var audio_collectFood_huge_1 = new Audio("./assets/sound/comedy_bite_creature_eating_07.wav");
+var audio_collectFood_huge_1 = new Audio("./assets/sounds/comedy_bite_creature_eating_07.wav");
 audio_collectFood_huge_1.volume = vol_food;
-var audio_collectFood_huge_2 = new Audio("./assets/sound/comedy_bite_creature_eating_08.wav");
+var audio_collectFood_huge_2 = new Audio("./assets/sounds/comedy_bite_creature_eating_08.wav");
 audio_collectFood_huge_2.volume = vol_food;
 var audio_collectFood_huge = [audio_collectFood_huge_1, audio_collectFood_huge_2];
 
-var audio_enemyHit = new Audio("./assets/sound/retro_damage_hurt_ouch_21.wav");
+var audio_enemyHit = new Audio("./assets/sounds/retro_damage_hurt_ouch_21.wav");
 audio_enemyHit.volume = 0.5;
 
-var audio_snowflake = new Audio("./assets/sound/Ice_4.mp3");
+var audio_snowflake = new Audio("./assets/sounds/Ice_4.mp3");
 audio_snowflake.volume = 0.2;
 
-var audio_clock = new Audio("./assets/sound/clock-ticking-4.wav");
+var audio_clock = new Audio("./assets/sounds/clock-ticking-4.wav");
 
-var audio_snowflake_end = new Audio("./assets/sound/Ice_8.mp3");
+var audio_snowflake_end = new Audio("./assets/sounds/Ice_8.mp3");
 audio_snowflake_end.volume = 0.2;
 
-var audio_hpPill = new Audio("./assets/sound/GetItem2.mp3");
+var audio_hpPill = new Audio("./assets/sounds/GetItem2.mp3");
 audio_hpPill.volume = 0.5;
 
-var audio_background = new Audio("./assets/sound/ChipChippy_(loop).mp3");
+var audio_background = new Audio("./assets/sounds/ChipChippy_(loop).mp3");
 audio_background.loop = true;
 audio_background.volume = 0.1;
 
-var audio_cherry_pick = new Audio("./assets/sound/Food2.mp3");
+var audio_cherry_pick = new Audio("./assets/sounds/Food2.mp3");
 
 
 const scale = 2;
