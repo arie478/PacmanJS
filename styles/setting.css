@@ -9,13 +9,14 @@
     border-radius: 10px;
 }
 
-.setting_box h2 {
+.setting_box h2 
+{
+    font-family: Frijole;
+    font-weight: lighter;
     margin: 0 0 30px;
-    padding: 0;
+    padding-bottom: 10px;
     color: #fff;
-    text-align: center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 35px;
+    font-size: 30px;
 }
 
 .setting_box .input_box {

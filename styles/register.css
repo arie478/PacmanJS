@@ -10,12 +10,13 @@
 }
 
 .register_box h2 {
+  font-family: Frijole;
+  font-weight: lighter;
   margin: 0 0 45px;
   padding: 0;
   color: #fff;
   text-align: center;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: 35px;
+  font-size: 30px;
 }
 
 .register_box .input_box {

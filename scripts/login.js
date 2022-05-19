@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    var current_user = null;
 
     // Save username and password in localStorage mechanism (no need to save full name, email and date)
     localStorage.setItem('k', 'k')
@@ -40,8 +39,9 @@ function login()
 
     if (real_password == passord_input) 
     {
+        online_user = username_input;
+        reset_setting_form();
         showPage('setting_screen');
-        current_user = username_input;
     }
     else 
     {
