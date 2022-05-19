@@ -1281,15 +1281,15 @@ function showMessage()
 {
 	if (settings_lives == 0)
 	{
-		window.alert("Loser! You will now be taken back to the settings menu where you can start a new game.");
+		window.alert("Loser! Click new game or go back to the log in menu and do better next time!");
 	}
 	else if (score < 100)
 	{
-		window.alert("You are better than " + score + " points! You will now be taken back to the settings menu where you can start a new game.");
+		window.alert("You are better than " + score + " points! Click new game or go back to the log in menu and try again, we believe in you!");
 	}
 	else
 	{
-		window.alert("Winner!!! You will now be taken back to the settings menu where you can start a new game.");
+		window.alert("Winner!!! Click new game or go back to the log in menu to play again and flex your pacman skills.");
 	}
 }
 
