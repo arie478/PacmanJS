@@ -1,7 +1,8 @@
 var keys_symbol = { 'up': 'ArrowUp', 'down': 'ArrowDown', 'left': 'ArrowLeft', 'right': 'ArrowRight' };
 var keys_code = { 'up': 38, 'down': 40, 'left': 37, 'right': 39 };
 var colors = { '5': '#ff0000', '15': '#0000ff', '25': '#3079a6' };
-var numbers = { 'balls': 70, 'ghosts': 3, 'total_time': 60 };
+var numbers = { 'balls': 70, 'ghosts': 3, 'time': 60 };
+var default_keys=[33,34,35,36,37,38,39,40];
 
 $(document).ready(function () {
     $('#setting_form').validate({
@@ -11,7 +12,7 @@ $(document).ready(function () {
             down: { required: true },
             left: { required: true },
             right: { required: true },
-            total_time: { required: true },
+            time: { required: true },
             balls: { required: true },
             ghosts: { required: true },
         },
@@ -21,25 +22,26 @@ $(document).ready(function () {
             down: { required: 'Please enter down button' },
             left: { required: 'Please enter left button' },
             right: { required: 'Please enter right button' },
-            total_time:
+            time:
             {
                 required: 'Please enter a number',
-                min: 'Minimum 60 seconds',
+                min: 'Minimum 60 seconds'
             },
             balls:
             {
                 required: 'Please enter a number',
                 min: 'Minimum 50 balls',
-                max: 'Maximum 90 balls',
+                max: 'Maximum 90 balls'
             },
             ghosts:
             {
                 required: 'Please enter a number',
                 min: 'Minimum 1 ghost',
-                max: 'Maximum 4 ghosts',
+                max: 'Maximum 4 ghosts'
             },
         },
-        errorPlacement: function (label, element) {
+        errorPlacement: function (label, element) 
+        {
             label.addClass('error_message');
             label.insertAfter(element);
         },
@@ -48,29 +50,37 @@ $(document).ready(function () {
 });
 
 // Take the user input key and insert it to keys_dict
-function set_key_pressed(key_pressed) {
-    $(document).keydown(function (event) {
-        keys_code[key_pressed] = event .keyCode;
-        // let c = event .keyCode;
+function set_key_pressed(key_pressed) 
+{
+    $(document).keydown(function (event) 
+    {
+    // if (document.getElementById(key_pressed).value != '')
+    // {
+    //     document.getElementById(key_pressed).value = '';
+    // }
+        keys_code[key_pressed] = event.keycode;
         keys_symbol[key_pressed] = event.key;
-        // if (((c < 48) || (c > 90)) && (c < 186)) {
-            document.getElementById(key_pressed).value = keys_symbol[key_pressed];
+        document.getElementById(key_pressed).value = keys_symbol[key_pressed];
+        // if (event.kecode > 33 && event.kecode < 90)
+        // {
+        //     document.getElementById(key_pressed).value = keys_symbol[key_pressed];
         // }
-        // else{
-            // document.getElementById(key_pressed).value = '';
+        // else
+        // {
+        //     document.getElementById(key_pressed).value = '';
         // }
-        // console.log(key_pressed + ': ' + keys_symbol[key_pressed]);
-
         $(document).unbind();
     });
 }
 
-function set_user_settings() {
+function set_user_settings() 
+{
     if ($('#setting_form').valid()) 
     {
         // Check if two or more keys are equals
         if (keys_code['up'] == keys_code['down'] || keys_code['up'] == keys_code['left'] || keys_code['up'] == keys_code['right'] ||
-            keys_code['down'] == keys_code['left'] || keys_code['down'] == keys_code['right'] || keys_code['left'] == keys_code['right']) {
+            keys_code['down'] == keys_code['left'] || keys_code['down'] == keys_code['right'] || keys_code['left'] == keys_code['right']) 
+            {
             alert('Some of the keys are equals');
             return;
         }
@@ -86,23 +96,14 @@ function set_user_settings() {
         colors['15'] = document.getElementById('15_points').value;
         colors['25'] = document.getElementById('25_points').value;
 
-        numbers['total_time'] = parseInt(document.getElementById('total_time').value);
+        numbers['time'] = parseInt(document.getElementById('time').value);
         numbers['balls'] = parseInt(document.getElementById('balls').value);
         numbers['ghosts'] = parseInt(document.getElementById('ghosts').value);
 
-        console.log(keys_code);
-        console.log(keys_symbol);
-        console.log(colors);
-        console.log(numbers);
-
-        // showPage('game_screen');
-
-        document.getElementById('game_screen').style.display = 'block';
-        // document.getElementById('setting_screen').style.display = 'block';
+        showPage('game_screen');
+        show_settings()
         context = canvas.getContext("2d");
         Start();
-        // context = canvas.getContext("2d");
-        // reset_setting_form();
     }
 }
 
@@ -136,14 +137,13 @@ function set_random_settings()
     document.getElementById('25_points').value = colors['25'];
 
     // NUMBERS
-    numbers['total_time'] = generate_random_number(60, 1000);
+    numbers['time'] = generate_random_number(60, 1000);
     numbers['balls'] = generate_random_number(50, 90);
     numbers['ghosts'] = generate_random_number(1, 4);
 
-    document.getElementById('total_time').value = numbers['total_time'];
+    document.getElementById('time').value = numbers['time'];
     document.getElementById('balls').value = numbers['balls'];
     document.getElementById('ghosts').value = numbers['ghosts'];
-
 }
 
 function generate_random_color() 
@@ -194,3 +194,5 @@ document.getElementById("start_game").addEventListener("click", function (event)
 document.getElementById("random_game").addEventListener("click", function (event) {
     event.preventDefault()
 });
+
+

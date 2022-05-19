@@ -15,6 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="styles/setting.css">
 	<link rel="stylesheet" type="text/css" href="styles/about.css">
 	<link rel="stylesheet" type="text/css" href="styles/footer.css">
+	<link rel="stylesheet" type="text/css" href="styles/game.css">
 
 </head>
 
@@ -42,7 +43,7 @@
 	<!-- ------------------------------- SCREENS ------------------------------- -->
 	<div class="screens_container">
 		<!-- --------------------------- WELCOME SCREEN ---------------------------- -->
-		<div class="screen" id="welcome_screen" style="display: none;">
+		<div class="screen" id="welcome_screen">
 			<img src="assets/images/pacman_11.png" width="900" height="500">
 
 			<nav class="welcome_buttons">
@@ -102,7 +103,7 @@
 		</div> <!-- end login screen-->
 
 		<!-- --------------------------- SETTING SCREEN ---------------------------- -->
-		<div class="screen" id="setting_screen">
+		<div class="screen" id="setting_screen" style="display: none;">
 			<div class="setting_box">
 				<h2>SETTINGS</h2>
 				<form id="setting_form" autocomplete="off">
@@ -141,11 +142,11 @@
 
 					<!-- NUMBERS -->
 					<div class="input_box">
-						<label>Duration of the Game (minimum 60 seconds)</label>
-						<input type="number" name="total_time" id="total_time" value="60" min="60">
+						<label>Playing Time (minimum 60 seconds)</label>
+						<input type="number" name="time" id="time" value="60" min="60" required>
 					</div>
 					<div class="input_box">
-						<label>Total Number of Balls (between 50 - 90)</label>
+						<label>Number of Balls (between 50 - 90)</label>
 						<input type="number" name="balls" id="balls" value="70" min="50" max="90">
 					</div>
 					<div class="input_box">
@@ -162,22 +163,84 @@
 
 		<!-- ----------------------------- GAME SCREEN ----------------------------- -->
 		<div class="screen" id="game_screen" style="display: none;">
-			<h2>game</h2>
-			<div id="lives">
-				<label for="lblLives">Lives:</label>
-				<input id="lblLives" type="text" />
+	
+
+			<div class="game_container">
+				<div class="properties">
+					<div class="property_box" id="player_name">
+						<label for="lblPlayer">Player Name:</label>
+						<input class="lbl_game" id="lblPlayer" type="text" />
+					</div>
+					<div class="property_box" id="score">
+						<label for="lblScore">SCORE:</label>
+						<input class="lbl_game" id="lblScore" type="text" />
+					</div>
+					<div class="property_box" id="time">
+						<label for="lblTime">TIME:</label>
+						<input class="lbl_game" id="lblTime" type="text" />
+					</div>
+					<div class="property_box" id="lives">
+						<label for="lblLives">Lives:</label>
+						<input class="lbl_game" id="lblLives" type="text" />
+					</div>
+				</div>
+				<div id="game">
+					<canvas id="canvas" height="600" width="600"></canvas>
+				</div>
 			</div>
-			<!-- <div id="score"> -->
-			<div id="score">
-				<label for="lblScore">SCORE:</label>
-				<input id="lblScore" type="text" />
-			</div>
-			<div id="time">
-				<label for="lblTime">TIME:</label>
-				<input id="lblTime" type="text" />
-			</div>
-			<div id="game">
-				<canvas id="canvas" height="600" width="600"></canvas>
+
+			<div class="setting_container">
+				<table class="tg">
+					<tbody>
+						<tr>
+							<td class="setting_header" colspan="2">SETTINGS</td>
+						</tr>
+						<tr>
+							<td class="cell">KEY UP</td>
+							<td class="cell"><input class="lbl_setting" id="lblUp" type="text" readonly /></td>
+						</tr>
+						<tr>
+							<td class="cell">KEY DOWN</td>
+							<td class="cell"><input class="lbl_setting" id="lblDown" type="text" readonly /></td>
+						</tr>
+						<tr>
+							<td class="cell">KEY RIGHT</td>
+							<td class="cell"><input class="lbl_setting" id="lblRight" type="text" readonly /></td>
+						</tr>
+						<tr>
+							<td class="cell">KEY LEFT</td>
+							<td class="cell"><input class="lbl_setting" id="lblLeft" type="text" readonly /></td>
+						</tr>
+						<tr>
+							<td class="cell">5 POINTS COLOR</td>
+							<td class="cell"><input class="lbl_setting" id="lbl5" type="color" disabled /></td>
+						</tr>
+						<tr>
+							<td class="cell">15 POINTS COLOR</td>
+							<td class="cell"><input class="lbl_setting" id="lbl15" type="color" disabled /></td>
+						</tr>
+						<tr>
+							<td class="cell">25 POINTS COLOR</td>
+							<td class="cell"><input class="lbl_setting" id="lbl25" type="color" disabled /></td>
+						</tr>
+						<tr>
+							<td class="cell">PLAYING TIME</td>
+							<td class="cell"><input class="lbl_setting" id="lblGameTime" type="text" readonly /></td>
+						</tr>
+						<tr>
+							<td class="cell">NUMBER OF BALLS</td>
+							<td class="cell"><input class="lbl_setting" id="lblBalls" type="text" readonly /></td>
+						</tr>
+						<tr>
+							<td class="cell">NUMBER OF GHOSTS</td>
+							<td class="cell"><input class="lbl_setting" id="lblGhosts" type="text" readonly /></td>
+						</tr>
+					</tbody>
+				</table>
+				<div>
+					<button class="game_button" id="login" onclick="showPage('setting_screen')"><i class="fa-solid fa-play"></i> NEW GAME</button>
+					<button class="game_button" id="login"><i class="fa-solid fa-volume-high"></i> MUSIC</button>
+				</div>
 			</div>
 		</div> <!-- end game screen -->
 
@@ -218,6 +281,7 @@
 	</footer>
 
 	<!-- ------------------------------- SCRIPTS ------------------------------- -->
+	<script src="https://kit.fontawesome.com/177289bc79.js" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="scripts/jquery-3.4.1.slim.min.js"></script>
 	<script type="text/javascript" src="scripts/jquery.validate.js"></script>
 
