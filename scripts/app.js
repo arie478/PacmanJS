@@ -163,7 +163,12 @@ rows_num = 20;
 cols_num = 20;
 var cnt = 179;
 
-
+var as = 0;
+var am = 0;
+var ab = 0;
+var s = 0;
+var m = 0;
+var b = 0;
 
 function Start() 
 {
@@ -185,6 +190,7 @@ function Start()
 	var small_food_remain = Math.round(numbers['balls']*0.6);
 	food_to_eat = big_food_remain + med_food_remain + small_food_remain;
 	food_to_make = food_to_eat;
+
 
 
 	frozen = false;
@@ -502,16 +508,20 @@ function Start()
 							board[i][j] = "F25";
 							big_food_remain--;
 							food_to_make--;
+
 						}
 						else if (food_type > 0.1 && food_type <= 0.4 && med_food_remain > 0) {
 							board[i][j] = "F15";
 							med_food_remain--;
 							food_to_make--;
+
+
 						}
 						else if (food_type > 0.4 && small_food_remain > 0) {
 							board[i][j] = "F5";
 							small_food_remain--;
 							food_to_make--;
+
 						}
 					} 
 					//Make empty space
@@ -539,16 +549,20 @@ function Start()
 			board[emptyCell[0]][emptyCell[01]] = "F25";
 			big_food_remain--;
 			food_to_make--;
+
 		}
 		else if (food_type > 0.1 && food_type <= 0.4 && med_food_remain > 0) {
 			board[emptyCell[0]][emptyCell[1]] = "F15";
 			med_food_remain--;
 			food_to_make--;
+
+
 		}
 		else if (food_type > 0.4 && small_food_remain > 0) {
 			board[emptyCell[0]][emptyCell[1]] = "F5";
 			small_food_remain--;
 			food_to_make--;
+
 		}
 	}
 
@@ -970,6 +984,8 @@ function UpdatePosition() {
 		score+= 25;
 		audio_collectFood_huge[Math.floor(Math.random()*audio_collectFood_huge.length)].play();
 		food_to_eat--;
+
+		
 	}
 	// Collecting food worth 15 points
 	if (board[player.i][player.j] == "F15") 
@@ -977,6 +993,7 @@ function UpdatePosition() {
 		score+= 15;
 		audio_collectFood_big[Math.floor(Math.random()*audio_collectFood_big.length)].play();
 		food_to_eat--;
+
 	}
 	// Collecting food worth 5 points
 	if (board[player.i][player.j] == "F5") 
@@ -984,6 +1001,7 @@ function UpdatePosition() {
 		score+= 5;
 		audio_collectFood[Math.floor(Math.random()*audio_collectFood.length)].play();
 		food_to_eat--;
+
 	}
 
 	// Collecting food worth 5 points
@@ -1183,10 +1201,7 @@ function spawn_power_up() {
 	}
 
 
-	//if (!power_up_freeze && randomNum > 0.5 && randomNum <= 0.75) {
-		if (!power_up_freeze) {
-		console.log(power_up_freeze);
-		console.log("Spawning Snowflake");
+	if (!power_up_freeze && randomNum > 0.5 && randomNum <= 0.75) {
 		power_up_freeze = true;
 		emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = "S";
