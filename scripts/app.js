@@ -1003,7 +1003,6 @@ function UpdatePosition() {
 	// Snow flake bonus pickup
 	if (board[player.i][player.j] == "S") 
 	{
-		power_up_freeze = true;
 		audio_snowflake.play();
 		setTimeout(function () {
 
@@ -1184,7 +1183,11 @@ function spawn_power_up() {
 	}
 
 
-	if (!power_up_freeze && randomNum > 0.5 && randomNum <= 0.75) {
+	//if (!power_up_freeze && randomNum > 0.5 && randomNum <= 0.75) {
+		if (!power_up_freeze) {
+		console.log(power_up_freeze);
+		console.log("Spawning Snowflake");
+		power_up_freeze = true;
 		emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = "S";
 		audio_power_popup[Math.floor(Math.random()*audio_power_popup.length)].play();
@@ -1250,7 +1253,9 @@ function gameOver()
 	window.clearInterval(power_ups);
 	window.clearInterval(start_timer_aux);
 	window.clearInterval(interval_cherry);
-	if (power_up_freeze)
+	cherry.i = -1;
+	cherry.j = -1;
+	if (!power_up_freeze)
 	{
 		window.clearInterval(freeze_timer);
 	}
