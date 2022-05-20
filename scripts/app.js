@@ -23,6 +23,7 @@ var cherry;
 var game_over;
 var start_timer_aux;
 var music_on;
+var freeze_active;
 
 $(document).ready(function() {
 	//context = canvas.getContext("2d");
@@ -172,6 +173,7 @@ var b = 0;
 
 function Start() 
 {
+	freeze_active = false;
 	music_on = true;
 	settings_lives = 5;
 	enemy_num = numbers['ghosts'];
@@ -1022,6 +1024,7 @@ function UpdatePosition() {
 	if (board[player.i][player.j] == "S") 
 	{
 		audio_snowflake.play();
+		freeze_active = true;
 		setTimeout(function () {
 
 			window.clearInterval(interval_enemy);
@@ -1034,6 +1037,7 @@ function UpdatePosition() {
 					interval_enemy = setInterval(moveEnemies,1000);
 					frozen = false;
 					power_up_freeze = false;
+					freeze_active = false;;
 			}, 10000);
 		}, 300);
 	}
