@@ -942,7 +942,11 @@ function moveEnemies() {
 				settings_lives--;
 				Draw();
 				gameOver();
-				showMessage();
+				
+				setTimeout(function () 
+				{
+					showMessage();
+				}, 300);
 			}
 		}
 		else {
@@ -1090,7 +1094,10 @@ function UpdatePosition() {
 			settings_lives--;
 			Draw();
 			gameOver();
-			showMessage();
+			setTimeout(function () 
+			{
+				showMessage();
+			}, 300);
 		}
 	}
 
@@ -1110,7 +1117,10 @@ function UpdatePosition() {
 	{
 		Draw();
 		gameOver();
-		showMessage();
+		setTimeout(function () 
+		{
+			showMessage();
+		}, 300);
 	} else {
 		Draw();
 	}
@@ -1185,7 +1195,10 @@ function startTimer( gameDuration, timer_div)
 			//Game over here
 			Draw();
            	gameOver();
-			showMessage();
+			setTimeout(function () 
+			{
+				showMessage();
+			}, 300);
         }
     }, 1000);
 }
