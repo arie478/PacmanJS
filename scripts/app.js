@@ -1270,7 +1270,7 @@ function gameOver()
 	window.clearInterval(interval_cherry);
 	cherry.i = -1;
 	cherry.j = -1;
-	if (!power_up_freeze)
+	if (power_up_freeze)
 	{
 		window.clearInterval(freeze_timer);
 	}
