@@ -940,6 +940,7 @@ function moveEnemies() {
 			else
 			{
 				settings_lives--;
+				Draw();
 				gameOver();
 				showMessage();
 			}
@@ -1087,6 +1088,7 @@ function UpdatePosition() {
 		else
 		{
 			settings_lives--;
+			Draw();
 			gameOver();
 			showMessage();
 		}
@@ -1106,13 +1108,9 @@ function UpdatePosition() {
 
 	if (food_to_eat == 0 ) 
 	{
-		setTimeout(function () 
-		{
-			gameOver();
-			showMessage();
-
-		}, 500);
-		
+		Draw();
+		gameOver();
+		showMessage();
 	} else {
 		Draw();
 	}
@@ -1185,6 +1183,7 @@ function startTimer( gameDuration, timer_div)
 		if (--timer < 0) 
 		{
 			//Game over here
+			Draw();
            	gameOver();
 			showMessage();
         }
@@ -1279,7 +1278,7 @@ function gameOver()
 	window.clearInterval(interval_cherry);
 	cherry.i = -1;
 	cherry.j = -1;
-	if (power_up_freeze)
+	if (freeze_active)
 	{
 		window.clearInterval(freeze_timer);
 	}
@@ -1290,15 +1289,15 @@ function showMessage()
 {
 	if (settings_lives == 0)
 	{
-		window.alert("Loser!");
+		window.alert("Loser! Click new game or go back to the log in menu and do better next time!");
 	}
 	else if (score < 100)
 	{
-		window.alert("You are better than " + score + " points!");
+		window.alert("You are better than " + score + " points! Click new game or go back to the log in menu and try again, we believe in you!");
 	}
 	else
 	{
-		window.alert("Winner!!!");
+		window.alert("Winner!!! Click new game or go back to the log in menu to play again and flex your pacman skills.");
 	}
 }
 
