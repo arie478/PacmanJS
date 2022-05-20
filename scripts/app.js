@@ -25,23 +25,17 @@ var start_timer_aux;
 var music_on;
 var freeze_active;
 
-$(document).ready(function() {
+$(document).ready(function () {
 	//context = canvas.getContext("2d");
-	window.addEventListener("keydown", function(e) {
-		if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+	window.addEventListener("keydown", function (e) {
+		if (["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(e.code) > -1) {
 			e.preventDefault();
 		}
 	}, false);
 });
 
-
 // SETTINGS
-
 vol_food = 0.1;
-
-// $(document).ready(function() {
-
-// });
 
 player_up = new Image();
 player_up.src = "./assets/images/PacManUp.png";
@@ -90,7 +84,7 @@ cherry.src = "./assets/images/cherry.png";
 
 background = new Image();
 //background.src = "./assets/images/Background.png";
-//background.src = "./assets/images/Background_Blue.png";
+// background.src = "./assets/images/Background_Blue.png";
 background.src = "./assets/images/Background_Light_Blue.png";
 
 enemy_frozen = new Image();
@@ -154,7 +148,6 @@ audio_background.volume = 0.1;
 
 var audio_cherry_pick = new Audio("./assets/sounds/Food2.mp3");
 
-
 const scale = 2;
 const width = 16;
 const height = 16;
@@ -171,8 +164,7 @@ var s = 0;
 var m = 0;
 var b = 0;
 
-function Start() 
-{
+function Start() {
 	freeze_active = false;
 	music_on = true;
 	settings_lives = 5;
@@ -187,13 +179,11 @@ function Start()
 	score = 0;
 	pac_color = "yellow";
 	// Allocate food in 10 30 60 % manner
-	var big_food_remain = Math.round(numbers['balls']*0.1);
-	var med_food_remain = Math.round(numbers['balls']*0.3);
-	var small_food_remain = Math.round(numbers['balls']*0.6);
+	var big_food_remain = Math.round(numbers['balls'] * 0.1);
+	var med_food_remain = Math.round(numbers['balls'] * 0.3);
+	var small_food_remain = Math.round(numbers['balls'] * 0.6);
 	food_to_eat = big_food_remain + med_food_remain + small_food_remain;
 	food_to_make = food_to_eat;
-
-
 
 	frozen = false;
 	power_up_clock = false;
@@ -451,7 +441,6 @@ function Start()
 	board[18][19] = "W";
 	board[19][19] = "W";
 
-
 	for (var i = 0; i < rows_num; i++) {
 		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		/**
@@ -503,8 +492,7 @@ function Start()
 				else {
 					var randomNum = Math.random();
 					//Make food
-					if (randomNum <= (1.0 * food_to_make) / cnt) 
-					{
+					if (randomNum <= (1.0 * food_to_make) / cnt) {
 						var food_type = Math.random();
 						if (food_type <= 0.1 && big_food_remain > 0) {
 							board[i][j] = "F25";
@@ -525,7 +513,7 @@ function Start()
 							food_to_make--;
 
 						}
-					} 
+					}
 					//Make empty space
 					else {
 						board[i][j] = "0";
@@ -542,8 +530,7 @@ function Start()
 	player.j = emptyCell[1];
 	board[emptyCell[0]][emptyCell[1]] = "P";
 
-	while (food_to_make > 0) 
-	{
+	while (food_to_make > 0) {
 		var emptyCell = findRandomEmptyCell(board);
 		var food_type = Math.random();
 
@@ -663,7 +650,6 @@ function Draw() {
 	}
 }
 
-
 function drawPlayer(center) {
 	if (pac_direction == "down") {
 		// Facing down
@@ -731,7 +717,6 @@ function drawCherry(center) {
 	context.drawImage(cherry, 0, 0, 29, 29, center.x - 13, center.y - 14, cell_width * 0.9, cell_height * 0.6);
 }
 
-
 function drawEnemy(center, i, j) {
 	// Facing up
 
@@ -765,13 +750,8 @@ function drawEnemy(center, i, j) {
 
 }
 
-function drawEmptySpace(center) {
-
-}
-
+// Calculate if the move is in the direction of the player
 function isApproachingPlayer(i_pre, j_pre, i_post, j_post) {
-	// Calculate if the move is in the direction of the player
-
 
 	var distance_pre_i = i_pre - player.i;
 	var distance_pre_j = j_pre - player.j;
@@ -786,9 +766,7 @@ function isApproachingPlayer(i_pre, j_pre, i_post, j_post) {
 	if (distance_post <= distance_pre) {
 		return true;
 	}
-
 	return false;
-
 }
 
 function isLegalMove(i_post, j_post) {
@@ -898,7 +876,6 @@ function randomMove(i, j) {
 	}
 
 	//Pick an option at random
-
 	var move = moveOptions[Math.floor(Math.random() * moveOptions.length)];
 	return move;
 }
@@ -931,20 +908,17 @@ function moveEnemies() {
 		if (enemies[k][1] == player.i && enemies[k][2] == player.j) {
 			//If player gets hit
 			audio_enemyHit.play();
-			if (settings_lives > 1)
-			{
+			if (settings_lives > 1) {
 				settings_lives--;
 				score -= 10;
 				resetAfterHit();
 			}
-			else
-			{
+			else {
 				settings_lives--;
 				Draw();
 				gameOver();
-				
-				setTimeout(function () 
-				{
+
+				setTimeout(function () {
 					showMessage();
 				}, 300);
 			}
@@ -986,29 +960,24 @@ function UpdatePosition() {
 	}
 
 	// Collecting food worth 25 points
-	if (board[player.i][player.j] == "F25") 
-	{
-		score+= 25;
-		audio_collectFood_huge[Math.floor(Math.random()*audio_collectFood_huge.length)].play();
+	if (board[player.i][player.j] == "F25") {
+		score += 25;
+		audio_collectFood_huge[Math.floor(Math.random() * audio_collectFood_huge.length)].play();
 		food_to_eat--;
-
-		
 	}
+
 	// Collecting food worth 15 points
-	if (board[player.i][player.j] == "F15") 
-	{
-		score+= 15;
-		audio_collectFood_big[Math.floor(Math.random()*audio_collectFood_big.length)].play();
+	if (board[player.i][player.j] == "F15") {
+		score += 15;
+		audio_collectFood_big[Math.floor(Math.random() * audio_collectFood_big.length)].play();
 		food_to_eat--;
-
 	}
-	// Collecting food worth 5 points
-	if (board[player.i][player.j] == "F5") 
-	{
-		score+= 5;
-		audio_collectFood[Math.floor(Math.random()*audio_collectFood.length)].play();
-		food_to_eat--;
 
+	// Collecting food worth 5 points
+	if (board[player.i][player.j] == "F5") {
+		score += 5;
+		audio_collectFood[Math.floor(Math.random() * audio_collectFood.length)].play();
+		food_to_eat--;
 	}
 
 	// Collecting food worth 5 points
@@ -1016,7 +985,6 @@ function UpdatePosition() {
 		score += 50;
 		audio_cherry.play();
 	}
-
 
 	// Timer bonus pickup
 	if (board[player.i][player.j] == "C") {
@@ -1026,23 +994,20 @@ function UpdatePosition() {
 	}
 
 	// Snow flake bonus pickup
-	if (board[player.i][player.j] == "S") 
-	{
+	if (board[player.i][player.j] == "S") {
 		audio_snowflake.play();
 		freeze_active = true;
 		setTimeout(function () {
-
 			window.clearInterval(interval_enemy);
 			interval_enemy = setInterval(moveEnemies, 2000);
 			frozen = true;
-			freeze_timer = setTimeout(function () 
-			{
-					audio_snowflake_end.play();
-					window.clearInterval(interval_enemy);
-					interval_enemy = setInterval(moveEnemies,1000);
-					frozen = false;
-					power_up_freeze = false;
-					freeze_active = false;;
+			freeze_timer = setTimeout(function () {
+				audio_snowflake_end.play();
+				window.clearInterval(interval_enemy);
+				interval_enemy = setInterval(moveEnemies, 1000);
+				frozen = false;
+				power_up_freeze = false;
+				freeze_active = false;;
 			}, 10000);
 		}, 300);
 	}
@@ -1070,8 +1035,7 @@ function UpdatePosition() {
 	if (board[player.i][player.j] == "E") {
 		//If player gets hit
 		audio_enemyHit.play();
-		if (settings_lives > 1)
-		{
+		if (settings_lives > 1) {
 			settings_lives--;
 			score -= 10;
 
@@ -1086,39 +1050,23 @@ function UpdatePosition() {
 					board[enemies_temp[k][1]][enemies_temp[k][2]] = enemies_temp[k][3]
 				}
 			}
-
-
 		}
-		else
-		{
+		else {
 			settings_lives--;
 			Draw();
 			gameOver();
-			setTimeout(function () 
-			{
+			setTimeout(function () {
 				showMessage();
 			}, 300);
 		}
 	}
 
- 
-	/**
-	 * 
-	 * 
-	 *  END GAME
-	 * 
-	 * 
-	 */
-
-
 	board[player.i][player.j] = "P";
 
-	if (food_to_eat == 0 ) 
-	{
+	if (food_to_eat == 0) {
 		Draw();
 		gameOver();
-		setTimeout(function () 
-		{
+		setTimeout(function () {
 			showMessage();
 		}, 300);
 	} else {
@@ -1132,7 +1080,6 @@ function resetAfterHit() {
 	window.clearInterval(time);
 
 	// Clear Enemies
-
 	for (let i = 0; i < enemies.length; i++) {
 		//Sort food memoery
 		if (enemies[i][3] == "F") {
@@ -1176,8 +1123,7 @@ function resetAfterHit() {
 
 }
 
-function startTimer( gameDuration, timer_div)
-{
+function startTimer(gameDuration, timer_div) {
 	var minutes, seconds;
 	timer = gameDuration;
 	start_timer_aux = setInterval(function () {
@@ -1187,20 +1133,17 @@ function startTimer( gameDuration, timer_div)
 		minutes = minutes < 10 ? "0" + minutes : minutes;
 		seconds = seconds < 10 ? "0" + seconds : seconds;
 
-		//timer_div.textContent = minutes + ":" + seconds;
 		lblTime.value = minutes + ":" + seconds;
 
-		if (--timer < 0) 
-		{
+		if (--timer < 0) {
 			//Game over here
 			Draw();
-           	gameOver();
-			setTimeout(function () 
-			{
+			gameOver();
+			setTimeout(function () {
 				showMessage();
 			}, 300);
-        }
-    }, 1000);
+		}
+	}, 1000);
 }
 
 function spawn_power_up() {
@@ -1226,15 +1169,11 @@ function spawn_power_up() {
 		power_up_freeze = true;
 		emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = "S";
-		audio_power_popup[Math.floor(Math.random()*audio_power_popup.length)].play();
+		audio_power_popup[Math.floor(Math.random() * audio_power_popup.length)].play();
 	}
 
-	if (!power_up_cherry && randomNum > 0.75)
-	{
-		//j 8 - 12 
-		// i 6 - 13
-		emptyCell = [9,8];
-
+	if (!power_up_cherry && randomNum > 0.75) {
+		emptyCell = [9, 8];
 		cherry.i = emptyCell[0];
 		cherry.j = emptyCell[1];
 		cherry.memory = "0"
@@ -1281,8 +1220,7 @@ function moveCherry() {
 	}
 }
 
-function gameOver()
-{
+function gameOver() {
 	window.clearInterval(interval);
 	window.clearInterval(interval_enemy);
 	window.clearInterval(countDowntimer);
@@ -1291,31 +1229,25 @@ function gameOver()
 	window.clearInterval(interval_cherry);
 	cherry.i = -1;
 	cherry.j = -1;
-	if (freeze_active)
-	{
+	if (freeze_active) {
 		window.clearInterval(freeze_timer);
 	}
 	audio_background.pause();
 }
 
-function showMessage()
-{
-	if (settings_lives == 0)
-	{
+function showMessage() {
+	if (settings_lives == 0) {
 		window.alert("Loser!");
 	}
-	else if (score < 100)
-	{
+	else if (score < 100) {
 		window.alert("You are better than " + score + " points!");
 	}
-	else
-	{
+	else {
 		window.alert("Winner!!!");
 	}
 }
 
-function show_settings()
-{
+function show_settings() {
 	lblUp.value = keys_symbol['up'];
 	lblDown.value = keys_symbol['down'];
 	lblRight.value = keys_symbol['right'];
@@ -1328,14 +1260,14 @@ function show_settings()
 	lblGhosts.value = numbers['ghosts'];
 }
 
-function check_music()
+function check_music() 
 {
-	if (music_on)
+	if (music_on) 
 	{
 		audio_background.pause();
 		music_on = false;
 	}
-	else
+	else 
 	{
 		audio_background.play();
 		music_on = true;

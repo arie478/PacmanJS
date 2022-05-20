@@ -85,13 +85,13 @@ function set_user_settings()
         colors['5'] = document.getElementById('5_points').value;
         colors['15'] = document.getElementById('15_points').value;
         colors['25'] = document.getElementById('25_points').value;
-
+        
         numbers['time'] = parseInt(document.getElementById('time').value);
         numbers['balls'] = parseInt(document.getElementById('balls').value);
         numbers['ghosts'] = parseInt(document.getElementById('ghosts').value);
 
         showPage('game_screen');
-        show_settings()
+        show_settings();
         context = canvas.getContext("2d");
         Start();
     }
@@ -178,11 +178,11 @@ function reset_setting_form() {
 
 // Clear adding in URL after submitting form
 document.getElementById("start_game").addEventListener("click", function (event) {
-    event.preventDefault()
+    event.preventDefault();
 });
 
 document.getElementById("random_game").addEventListener("click", function (event) {
-    event.preventDefault()
+    event.preventDefault();
 });
 
 
