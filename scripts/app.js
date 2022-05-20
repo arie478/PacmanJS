@@ -1106,8 +1106,13 @@ function UpdatePosition() {
 
 	if (food_to_eat == 0 ) 
 	{
-		gameOver();
-		showMessage();
+		setTimeout(function () 
+		{
+			gameOver();
+			showMessage();
+
+		}, 500);
+		
 	} else {
 		Draw();
 	}
