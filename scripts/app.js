@@ -1290,15 +1290,15 @@ function showMessage()
 {
 	if (settings_lives == 0)
 	{
-		window.alert("Loser! Click new game or go back to the log in menu and do better next time!");
+		window.alert("Loser!");
 	}
 	else if (score < 100)
 	{
-		window.alert("You are better than " + score + " points! Click new game or go back to the log in menu and try again, we believe in you!");
+		window.alert("You are better than " + score + " points!");
 	}
 	else
 	{
-		window.alert("Winner!!! Click new game or go back to the log in menu to play again and flex your pacman skills.");
+		window.alert("Winner!!!");
 	}
 }
 
