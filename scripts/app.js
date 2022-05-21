@@ -628,7 +628,7 @@ function Draw() {
 			}
 
 			else if (board[i][j] == "0") {
-				drawEmptySpace(center);
+				//drawEmptySpace(center);
 			}
 
 			else if (board[i][j] == "C") {
