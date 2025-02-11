@@ -1,5 +1,6 @@
 # Pacman Game
 ### Overview
+This project was done for a Web Development Environments course for educational purposes.
 This is a Pacman game for our web development course.<br>
 We used JavaScript, jQuery, HTML, and CSS.
 
